@@ -25,7 +25,9 @@
     "server:dev": "cross-env NODE_ENV=development webpack-dev-server --progress",
     "start": "npm run server:dev",
     "test": "cross-env NODE_ENV=test karma start --single-run",
-    "test:watch": "cross-env NODE_ENV=test karma start"
+    "test:watch": "cross-env NODE_ENV=test karma start",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "dependencies": {
     "babel-polyfill": "~6.13.0",
@@ -38,7 +40,8 @@
     "react-router-redux": "~4.0.6",
     "redux": "~3.6.0",
     "redux-thunk": "~2.1.0",
-    "reselect": "~2.5.4"
+    "reselect": "~2.5.4",
+    "snyk": "^1.316.1"
   },
   "devDependencies": {
     "autoprefixer": "~6.4.1",
@@ -80,5 +83,6 @@
     "webpack-dev-server": "~1.16.1",
     "webpack-md5-hash": "~0.0.5",
     "winston": "~2.2.0"
-  }
+  },
+  "snyk": true
 }
