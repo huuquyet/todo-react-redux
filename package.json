@@ -79,6 +79,6 @@
     "webpack": "~1.13.2",
     "webpack-dev-server": "~1.16.1",
     "webpack-md5-hash": "~0.0.5",
-    "winston": "~2.2.0"
+    "winston": "~3.3.3"
   }
 }
