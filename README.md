@@ -1,4 +1,5 @@
 [![CircleCI](https://circleci.com/gh/r-park/todo-react-redux.svg?style=shield&circle-token=6caf8c493bd66544717ff9a47ae01d8be036e53c)](https://circleci.com/gh/r-park/todo-react-redux)
+[![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=anyulled/todo-react-redux)](https://dependabot.com)
 
 
 # Todo app with React, Redux, and Firebase
