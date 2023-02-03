@@ -1,5 +1,6 @@
-import { getDeletedTask } from './selectors';
-import { taskList } from './task-list';
+import {getDeletedTask} from './selectors';
+import {taskList} from './task-list';
+
 import {
   CREATE_TASK_ERROR,
   CREATE_TASK_SUCCESS,
@@ -110,7 +111,7 @@ export function filterTasks(filterType) {
 
 export function loadTasks() {
   return (dispatch, getState) => {
-    const { auth } = getState();
+    const {auth} = getState();
     taskList.path = `tasks/${auth.id}`;
     taskList.subscribe(dispatch);
   };

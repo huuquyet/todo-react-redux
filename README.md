@@ -1,11 +1,11 @@
 [![CircleCI](https://circleci.com/gh/r-park/todo-react-redux.svg?style=shield&circle-token=6caf8c493bd66544717ff9a47ae01d8be036e53c)](https://circleci.com/gh/r-park/todo-react-redux)
 [![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=anyulled/todo-react-redux)](https://dependabot.com)
 
-
 # Todo app with React, Redux, and Firebase
+
 A simple Todo app example with **undelete** capability — built with React, Redux, and Firebase.
 
-Try the demo at https://todo-react-redux.firebaseapp.com. 
+Try the demo at https://todo-react-redux.firebaseapp.com
 
 A version of this app built with [redux-saga middleware](https://github.com/yelouafi/redux-saga) is available [here](https://github.com/r-park/todo-redux-saga).
 
@@ -27,7 +27,6 @@ A version of this app built with [redux-saga middleware](https://github.com/yelo
 - SASS
 - Webpack
 
-
 Quick Start
 -----------
 
@@ -39,12 +38,15 @@ $ npm start
 ```
 
 ## Deploying to Firebase
+
 #### Prerequisites:
+
 - Create a free Firebase account at https://firebase.google.com
 - Create a project from your [Firebase account console](https://console.firebase.google.com)
 - Configure the authentication providers for your Firebase project from your Firebase account console
 
 #### Configure this app with your project-specific details:
+
 ```javascript
 // .firebaserc
 
@@ -54,6 +56,7 @@ $ npm start
   }
 }
 ```
+
 ```javascript
 // src/core/firebase/config.js
 
@@ -66,18 +69,19 @@ export const firebaseConfig = {
 ```
 
 #### Install firebase-tools:
+
 ```shell
 $ npm install -g firebase-tools
 ```
 
 #### Build and deploy the app:
+
 ```shell
 $ npm run build
 $ firebase login
 $ firebase use default
 $ firebase deploy
 ```
-
 
 NPM Commands
 ------------

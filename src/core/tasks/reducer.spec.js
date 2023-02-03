@@ -1,6 +1,8 @@
-import { List } from 'immutable';
-import { SIGN_OUT_SUCCESS } from 'src/core/auth';
+import {List} from 'immutable';
 
+import {
+  SIGN_OUT_SUCCESS
+} from 'src/core/auth';
 import {
   CREATE_TASK_SUCCESS,
   DELETE_TASK_SUCCESS,
@@ -9,8 +11,8 @@ import {
   UPDATE_TASK_SUCCESS
 } from './action-types';
 
-import { Task } from './task';
-import { tasksReducer, TasksState } from './reducer';
+import {Task} from './task';
+import {tasksReducer, TasksState} from './reducer';
 
 
 describe('tasks', () => {

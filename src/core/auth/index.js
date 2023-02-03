@@ -1,11 +1,11 @@
-import { firebaseAuth } from 'src/core/firebase';
+import {firebaseAuth} from 'src/core/firebase';
 import * as authActions from './actions';
 
 
-export { authActions };
+export {authActions};
 export * from './action-types';
-export { authReducer } from './reducer';
-export { getAuth, isAuthenticated } from './selectors';
+export {authReducer} from './reducer';
+export {getAuth, isAuthenticated} from './selectors';
 
 
 export function initAuth(dispatch) {

@@ -1,5 +1,7 @@
-import { Simulate } from 'react-addons-test-utils';
-import { createTestComponent } from 'test/utils';
+import {Simulate} from 'react-dom/test-utils';
+import sinon from 'sinon';
+
+import {createTestComponent} from 'test/utils';
 import Notification from './index';
 
 

@@ -1,10 +1,10 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { AppContainer } from 'react-hot-loader';
-import { browserHistory } from 'react-router';
-import { syncHistoryWithStore } from 'react-router-redux';
+import {createRoot} from 'react-dom/client';
+import {AppContainer} from 'react-hot-loader';
+import {browserHistory} from 'react-router';
+import {syncHistoryWithStore} from 'react-router-redux';
 
-import { initAuth } from './core/auth';
+import {initAuth} from './core/auth';
 import configureStore from './core/store';
 import Root from './views/root';
 import './views/styles/styles.scss';
@@ -12,15 +12,15 @@ import './views/styles/styles.scss';
 
 const store = configureStore();
 const syncedHistory = syncHistoryWithStore(browserHistory, store);
-const rootElement = document.getElementById('root');
+const container = document.getElementById('root');
+const root = createRoot(container);
 
 
 function render(Root) {
-  ReactDOM.render(
+  root.render(
     <AppContainer>
       <Root history={syncedHistory} store={store} />
-    </AppContainer>,
-    rootElement
+    </AppContainer>
   );
 }
 

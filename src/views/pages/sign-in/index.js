@@ -1,6 +1,8 @@
-import React, { PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { authActions } from 'src/core/auth';
+import React from 'react';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+
+import {authActions} from 'src/core/auth';
 
 
 export function SignIn({signInWithGithub, signInWithGoogle, signInWithTwitter}) {

@@ -1,9 +1,8 @@
-import { List, Record } from 'immutable';
+import {List, Record} from 'immutable';
 
 import {
   SIGN_OUT_SUCCESS
 } from 'src/core/auth';
-
 import {
   CREATE_TASK_SUCCESS,
   DELETE_TASK_SUCCESS,
@@ -28,8 +27,8 @@ export function tasksReducer(state = new TasksState(), {payload, type}) {
         deleted: null,
         previous: null,
         list: state.deleted && state.deleted.key === payload.key ?
-              state.previous :
-              state.list.unshift(payload)
+          state.previous :
+          state.list.unshift(payload)
       });
 
     case DELETE_TASK_SUCCESS:

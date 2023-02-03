@@ -1,6 +1,8 @@
-import React, { PropTypes } from 'react';
-import { List } from 'immutable';
-import TaskItem from '../task-item';
+import React from 'react';
+import PropTypes from 'prop-types';
+import {List} from 'immutable';
+
+import TaskItem from 'src/views/components/task-item';
 
 
 function TaskList({deleteTask, tasks, updateTask}) {

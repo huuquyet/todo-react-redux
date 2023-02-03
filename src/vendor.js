@@ -13,6 +13,6 @@ import 'redux-thunk';
 
 //
 import 'classnames';
-import 'firebase';
+import 'firebase/compat/app';
 import 'immutable';
 import 'reselect';

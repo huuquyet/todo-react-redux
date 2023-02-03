@@ -1,10 +1,11 @@
-import { DELETE_TASK_SUCCESS } from 'src/core/tasks';
-
+import {
+  DELETE_TASK_SUCCESS
+} from 'src/core/tasks';
 import {
   DISMISS_NOTIFICATION
 } from './action-types';
 
-import { notificationReducer } from './reducer';
+import {notificationReducer} from './reducer';
 
 
 describe('Notification reducer', () => {

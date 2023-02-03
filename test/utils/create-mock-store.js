@@ -1,4 +1,4 @@
-import { applyMiddleware } from 'redux';
+import {applyMiddleware} from 'redux';
 
 
 export function createMockStore(state, expectedActions, middleware, done) {
@@ -18,8 +18,7 @@ export function createMockStore(state, expectedActions, middleware, done) {
         try {
           if (typeof expectedAction === 'function') {
             expect(expectedAction(action)).toBe(true);
-          }
-          else {
+          } else {
             expect(action).toEqual(expectedAction);
           }
 
@@ -28,8 +27,7 @@ export function createMockStore(state, expectedActions, middleware, done) {
           }
 
           return action;
-        }
-        catch (error) {
+        } catch (error) {
           done(error);
         }
       },

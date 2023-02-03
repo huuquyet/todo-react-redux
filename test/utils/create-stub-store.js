@@ -1,4 +1,4 @@
-import { applyMiddleware } from 'redux';
+import {applyMiddleware} from 'redux';
 
 
 export function createStubStore(state, middleware) {

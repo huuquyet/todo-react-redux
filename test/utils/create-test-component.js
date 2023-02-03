@@ -1,13 +1,9 @@
-import React, { Component } from 'react';
-import {
-  findRenderedComponentWithType,
-  renderIntoDocument
-} from 'react-addons-test-utils';
+import {findRenderedComponentWithType, renderIntoDocument} from 'react-dom/test-utils';
 
 
-export function createTestComponent(TestComponent, props) {
+export function createTestComponent(TestComponent) {
   return findRenderedComponentWithType(
-    renderIntoDocument(<TestComponent {...props}/>),
+    renderIntoDocument(TestComponent),
     TestComponent
   );
 }

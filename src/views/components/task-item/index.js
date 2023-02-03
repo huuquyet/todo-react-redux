@@ -1,6 +1,8 @@
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import React, { Component, PropTypes } from 'react';
-import { Task } from 'src/core/tasks';
+
+import {Task} from 'src/core/tasks';
 
 
 class TaskItem extends Component {
@@ -14,6 +16,7 @@ class TaskItem extends Component {
     super(props, context);
 
     this.state = {editing: false};
+    this.titleInput = React.createRef();
 
     this.delete = ::this.delete;
     this.editTitle = ::this.editTitle;
@@ -25,7 +28,7 @@ class TaskItem extends Component {
 
   shouldComponentUpdate(nextProps, nextState) {
     return nextProps.task !== this.props.task ||
-           nextState.editing !== this.state.editing;
+      nextState.editing !== this.state.editing;
   }
 
   delete() {
@@ -38,7 +41,7 @@ class TaskItem extends Component {
 
   saveTitle(event) {
     if (this.state.editing) {
-      const { task } = this.props;
+      const {task} = this.props;
       const title = event.target.value.trim();
 
       if (title.length && title !== task.title) {
@@ -87,15 +90,15 @@ class TaskItem extends Component {
         maxLength="64"
         onBlur={this.saveTitle}
         onKeyUp={this.onKeyUp}
-        ref={c => this.titleInput = c}
+        ref={this.titleInput}
         type="text"
       />
     );
   }
 
   render() {
-    const { editing } = this.state;
-    const { task } = this.props;
+    const {editing} = this.state;
+    const {task} = this.props;
 
     return (
       <div className={classNames('task-item', {'task-item--completed': task.completed, 'task-item--editing': editing})} tabIndex="0">

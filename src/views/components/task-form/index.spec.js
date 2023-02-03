@@ -1,6 +1,7 @@
-import { Simulate } from 'react-addons-test-utils';
-import { findDOMNode } from 'react-dom';
-import { createTestComponent } from 'test/utils';
+import {Simulate} from 'react-dom/test-utils';
+import sinon from 'sinon';
+
+import {createTestComponent} from 'test/utils';
 import TaskForm from './index';
 
 
@@ -126,14 +127,14 @@ describe('TaskForm', () => {
     describe('`submit` event triggered on form', () => {
       it('should prevent the default action of the event', () => {
         const event = {preventDefault: sinon.spy()};
-        Simulate.submit(findDOMNode(taskForm), event);
+        Simulate.submit((taskForm), event);
         expect(event.preventDefault.callCount).toEqual(1);
       });
 
       it('should set text field value with an empty string', () => {
         const event = {preventDefault: sinon.spy()};
         taskForm.setState({title: 'foo'});
-        Simulate.submit(findDOMNode(taskForm), event);
+        Simulate.submit((taskForm), event);
         expect(taskForm.titleInput.value).toEqual('');
       });
     });

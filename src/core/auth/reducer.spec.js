@@ -4,7 +4,7 @@ import {
   SIGN_OUT_SUCCESS
 } from './action-types';
 
-import { authReducer } from './reducer';
+import {authReducer} from './reducer';
 
 
 describe('Auth reducer', () => {

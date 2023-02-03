@@ -1,5 +1,7 @@
-import firebase from 'firebase';
-import { firebaseAuth } from 'src/core/firebase';
+import firebase from 'firebase/compat/app';
+
+import {firebaseAuth} from 'src/core/firebase';
+
 import {
   INIT_AUTH,
   SIGN_IN_ERROR,

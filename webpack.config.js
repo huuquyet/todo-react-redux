@@ -1,9 +1,8 @@
-const autoprefixer = require('autoprefixer');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const { LoaderOptionsPlugin, HotModuleReplacementPlugin } = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const path = require('path');
-const webpack = require('webpack');
-const WebpackMd5Hash = require('webpack-md5-hash');
+const Dotenv = require('dotenv-webpack');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { resolve } = require('path');
 
 
 //=========================================================
@@ -23,8 +22,10 @@ const PORT = 3000;
 //  LOADERS
 //---------------------------------------------------------
 const loaders = {
-  js: {test: /\.js$/, exclude: /node_modules/, loader: 'babel'},
-  scss: {test: /\.scss$/, loader: 'style!css!postcss!sass'}
+  js: {test: /\.js$/i, exclude: /node_modules/, use: ['babel-loader']},
+  scss: {test: /\.s[ac]ss$/i, use: [
+    ENV_DEVELOPMENT ? 'style-loader' : MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'
+  ]}
 };
 
 
@@ -37,25 +38,22 @@ module.exports = config;
 
 config.resolve = {
   extensions: ['', '.js'],
-  modulesDirectories: ['node_modules'],
-  root: path.resolve('.')
+  modules: [resolve('.'), 'node_modules']
 };
 
 config.plugins = [
-  new webpack.DefinePlugin({
-    'process.env.NODE_ENV': JSON.stringify(NODE_ENV)
+  new Dotenv(),
+  new LoaderOptionsPlugin({
+    // test: /\.xxx$/, // may apply this only for some modules
+    options: {
+      sassLoader: {
+        outputStyle: 'compressed',
+        precision: 10,
+        sourceComments: false
+      }
+    }
   })
 ];
-
-config.postcss = [
-  autoprefixer({ browsers: ['last 3 versions'] })
-];
-
-config.sassLoader = {
-  outputStyle: 'compressed',
-  precision: 10,
-  sourceComments: false
-};
 
 
 //=====================================
@@ -68,7 +66,7 @@ if (ENV_DEVELOPMENT || ENV_PRODUCTION) {
 
   config.output = {
     filename: '[name].js',
-    path: path.resolve('./target'),
+    path: resolve('./target'),
     publicPath: '/'
   };
 
@@ -98,33 +96,37 @@ if (ENV_DEVELOPMENT) {
   );
 
   config.module = {
-    loaders: [
+    rules: [
       loaders.js,
       loaders.scss
     ]
   };
 
   config.plugins.push(
-    new webpack.HotModuleReplacementPlugin()
+    new HotModuleReplacementPlugin()
   );
 
   config.devServer = {
-    contentBase: './src',
+    static: {
+      directory: './src'
+    },
     historyApiFallback: true,
     host: HOST,
     hot: true,
     port: PORT,
-    publicPath: config.output.publicPath,
-    stats: {
-      cached: true,
-      cachedAssets: true,
-      chunks: true,
-      chunkModules: false,
-      colors: true,
-      hash: false,
-      reasons: true,
-      timings: true,
-      version: false
+    devMiddleware: {
+      publicPath: config.output.publicPath,
+      stats: {
+        cached: true,
+        cachedAssets: true,
+        chunks: true,
+        chunkModules: false,
+        colors: true,
+        hash: false,
+        reasons: true,
+        timings: true,
+        version: false
+      }
     }
   };
 }
@@ -138,33 +140,32 @@ if (ENV_PRODUCTION) {
 
   config.entry.vendor = './src/vendor.js';
 
-  config.output.filename = '[name].[chunkhash].js';
+  config.output.filename = '[name].[contenthash].js';
 
   config.module = {
-    loaders: [
+    rules: [
       loaders.js,
-      {test: /\.scss$/, loader: ExtractTextPlugin.extract('css?-autoprefixer!postcss!sass')}
+      loaders.scss
     ]
   };
 
   config.plugins.push(
-    new WebpackMd5Hash(),
-    new ExtractTextPlugin('styles.[contenthash].css'),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      minChunks: Infinity
-    }),
-    new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.UglifyJsPlugin({
-      mangle: true,
-      compress: {
-        dead_code: true, // eslint-disable-line camelcase
-        screw_ie8: true, // eslint-disable-line camelcase
-        unused: true,
-        warnings: false
-      }
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+      chunkFilename: 'styles.[contenthash].css'
     })
   );
+
+  config.optimization = {
+    splitChunks: {
+      cacheGroups: {
+        commons: {
+          name: 'vendor',
+          minChunks: Infinity
+        }
+      }
+    }
+  };
 }
 
 
@@ -175,7 +176,7 @@ if (ENV_TEST) {
   config.devtool = 'inline-source-map';
 
   config.module = {
-    loaders: [
+    rules: [
       loaders.js,
       loaders.scss
     ]

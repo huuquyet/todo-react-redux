@@ -1,4 +1,4 @@
-import { Record } from 'immutable';
+import {Record} from 'immutable';
 
 
 export const Task = new Record({

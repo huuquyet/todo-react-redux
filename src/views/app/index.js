@@ -1,25 +1,27 @@
-import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { createSelector } from 'reselect';
-import { authActions, getAuth } from 'src/core/auth';
-import { paths } from '../routes';
-import Header from '../components/header';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {createSelector} from 'reselect';
+
+import {authActions, getAuth} from 'src/core/auth';
+import {paths} from 'src/views/routes';
+import Header from 'src/views/components/header';
 
 
 export class App extends Component {
-  static contextTypes = {
-    router: React.PropTypes.object.isRequired
-  };
-
   static propTypes = {
     auth: PropTypes.object.isRequired,
     children: PropTypes.object.isRequired,
     signOut: PropTypes.func.isRequired
   };
 
+  static contextTypes = {
+    router: PropTypes.object.isRequired
+  };
+
   componentWillReceiveProps(nextProps) {
-    const { router } = this.context;
-    const { auth } = this.props;
+    const {router} = this.context;
+    const {auth} = this.props;
 
     if (auth.authenticated && !nextProps.auth.authenticated) {
       router.replace(paths.SIGN_IN);

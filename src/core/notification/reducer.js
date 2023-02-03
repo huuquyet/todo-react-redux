@@ -1,6 +1,11 @@
-import { Record } from 'immutable';
-import { DELETE_TASK_SUCCESS } from 'src/core/tasks';
-import { DISMISS_NOTIFICATION } from './action-types';
+import {Record} from 'immutable';
+
+import {
+  DELETE_TASK_SUCCESS
+} from 'src/core/tasks';
+import {
+  DISMISS_NOTIFICATION
+} from './action-types';
 
 
 export const NotificationState = new Record({

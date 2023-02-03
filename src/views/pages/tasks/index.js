@@ -1,14 +1,15 @@
-import { List } from 'immutable';
-import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { createSelector } from 'reselect';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {createSelector} from 'reselect';
+import {List} from 'immutable';
 
-import { getNotification, notificationActions } from 'src/core/notification';
-import { getTaskFilter, getVisibleTasks, tasksActions } from 'src/core/tasks';
-import Notification from '../../components/notification';
-import TaskFilters from '../../components/task-filters';
-import TaskForm from '../../components/task-form';
-import TaskList from '../../components/task-list';
+import {getNotification, notificationActions} from 'src/core/notification';
+import {getTaskFilter, getVisibleTasks, tasksActions} from 'src/core/tasks';
+import Notification from 'src/views/components/notification';
+import TaskFilters from 'src/views/components/task-filters';
+import TaskForm from 'src/views/components/task-form';
+import TaskList from 'src/views/components/task-list';
 
 
 export class Tasks extends Component {
@@ -43,7 +44,7 @@ export class Tasks extends Component {
   }
 
   renderNotification() {
-    const { notification } = this.props;
+    const {notification} = this.props;
     return (
       <Notification
         action={this.props.undeleteTask}

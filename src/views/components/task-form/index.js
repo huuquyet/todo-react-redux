@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 
 
 class TaskForm extends Component {
@@ -10,6 +11,7 @@ class TaskForm extends Component {
     super(props, context);
 
     this.state = {title: ''};
+    this.titleInput = React.createRef();
 
     this.onChange = ::this.onChange;
     this.onKeyUp = ::this.onKeyUp;
@@ -48,7 +50,7 @@ class TaskForm extends Component {
           onChange={this.onChange}
           onKeyUp={this.onKeyUp}
           placeholder="What needs to be done?"
-          ref={c => this.titleInput = c}
+          ref={this.titleInput}
           type="text"
           value={this.state.title}
         />

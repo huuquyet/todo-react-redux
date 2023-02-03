@@ -1,6 +1,6 @@
-import { FirebaseList } from 'src/core/firebase';
+import {FirebaseList} from 'src/core/firebase';
 import * as taskActions from './actions';
-import { Task } from './task';
+import {Task} from './task';
 
 
 export const taskList = new FirebaseList({

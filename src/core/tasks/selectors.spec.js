@@ -1,7 +1,8 @@
-import { List } from 'immutable';
-import { TasksState } from './reducer';
-import { getVisibleTasks } from './selectors';
-import { Task } from './task';
+import {List} from 'immutable';
+
+import {TasksState} from './reducer';
+import {getVisibleTasks} from './selectors';
+import {Task} from './task';
 
 
 describe('tasks', () => {
