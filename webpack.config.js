@@ -1,9 +1,8 @@
-const { LoaderOptionsPlugin, HotModuleReplacementPlugin } = require('webpack');
+const {LoaderOptionsPlugin, HotModuleReplacementPlugin} = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const { resolve } = require('path');
-
+const {resolve} = require('path');
 
 //=========================================================
 //  ENVIRONMENT VARS
@@ -17,17 +16,27 @@ const ENV_TEST = NODE_ENV === 'test';
 const HOST = '0.0.0.0';
 const PORT = 3000;
 
-
 //=========================================================
 //  LOADERS
 //---------------------------------------------------------
 const loaders = {
-  js: {test: /\.js$/i, exclude: /node_modules/, use: ['babel-loader']},
-  scss: {test: /\.s[ac]ss$/i, use: [
-    ENV_DEVELOPMENT ? 'style-loader' : MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'
-  ]}
+  js: {
+    test: /\.m?js$/i,
+    exclude: /node_modules/,
+    use: {
+      loader: 'babel-loader',
+      options: {presets: [['@babel/preset-env', {targets: 'defaults'}]]},
+    },
+  },
+  scss: {
+    test: /\.s[ac]ss$/i,
+    use: [
+      ENV_DEVELOPMENT ? 'style-loader' : MiniCssExtractPlugin.loader,
+      'css-loader',
+      'sass-loader',
+    ],
+  },
 };
-
 
 //=========================================================
 //  CONFIG
@@ -35,10 +44,9 @@ const loaders = {
 const config = {};
 module.exports = config;
 
-
 config.resolve = {
   extensions: ['', '.js'],
-  modules: [resolve('.'), 'node_modules']
+  modules: [resolve('.'), 'node_modules'],
 };
 
 config.plugins = [
@@ -49,25 +57,24 @@ config.plugins = [
       sassLoader: {
         outputStyle: 'compressed',
         precision: 10,
-        sourceComments: false
-      }
-    }
-  })
+        sourceComments: false,
+      },
+    },
+  }),
 ];
-
 
 //=====================================
 //  DEVELOPMENT or PRODUCTION
 //-------------------------------------
 if (ENV_DEVELOPMENT || ENV_PRODUCTION) {
   config.entry = {
-    main: ['./src/main.js']
+    main: ['./src/main.js'],
   };
 
   config.output = {
     filename: '[name].js',
     path: resolve('./target'),
-    publicPath: '/'
+    publicPath: '/',
   };
 
   config.plugins.push(
@@ -76,11 +83,10 @@ if (ENV_DEVELOPMENT || ENV_PRODUCTION) {
       filename: 'index.html',
       hash: false,
       inject: 'body',
-      template: './src/index.html'
+      template: './src/index.html',
     })
   );
 }
-
 
 //=====================================
 //  DEVELOPMENT
@@ -92,23 +98,19 @@ if (ENV_DEVELOPMENT) {
     `webpack-dev-server/client?http://${HOST}:${PORT}`,
     'webpack/hot/only-dev-server',
     'react-hot-loader/patch',
-    'babel-polyfill'
+    'core-js/stable',
+    'regenerator-runtime/runtime'
   );
 
   config.module = {
-    rules: [
-      loaders.js,
-      loaders.scss
-    ]
+    rules: [loaders.js, loaders.scss],
   };
 
-  config.plugins.push(
-    new HotModuleReplacementPlugin()
-  );
+  config.plugins.push(new HotModuleReplacementPlugin());
 
   config.devServer = {
     static: {
-      directory: './src'
+      directory: './src',
     },
     historyApiFallback: true,
     host: HOST,
@@ -125,12 +127,11 @@ if (ENV_DEVELOPMENT) {
         hash: false,
         reasons: true,
         timings: true,
-        version: false
-      }
-    }
+        version: false,
+      },
+    },
   };
 }
-
 
 //=====================================
 //  PRODUCTION
@@ -138,21 +139,31 @@ if (ENV_DEVELOPMENT) {
 if (ENV_PRODUCTION) {
   config.devtool = 'source-map';
 
-  config.entry.vendor = './src/vendor.js';
+  config.entry.vendor = [
+    'react',
+    'react-dom',
+    'react-router',
+    'react-router-redux',
+    'react-redux',
+    'redux',
+    'redux-thunk',
+    'core-js/stable',
+    'regenerator-runtime/runtime',
+    'firebase/compat/app',
+    'immutable',
+    'reselect',
+  ];
 
   config.output.filename = '[name].[contenthash].js';
 
   config.module = {
-    rules: [
-      loaders.js,
-      loaders.scss
-    ]
+    rules: [loaders.js, loaders.scss],
   };
 
   config.plugins.push(
     new MiniCssExtractPlugin({
       filename: '[name].css',
-      chunkFilename: 'styles.[contenthash].css'
+      chunkFilename: 'styles.[contenthash].css',
     })
   );
 
@@ -161,13 +172,12 @@ if (ENV_PRODUCTION) {
       cacheGroups: {
         commons: {
           name: 'vendor',
-          minChunks: Infinity
-        }
-      }
-    }
+          minChunks: Infinity,
+        },
+      },
+    },
   };
 }
-
 
 //=====================================
 //  TEST
@@ -176,9 +186,6 @@ if (ENV_TEST) {
   config.devtool = 'inline-source-map';
 
   config.module = {
-    rules: [
-      loaders.js,
-      loaders.scss
-    ]
+    rules: [loaders.js, loaders.scss],
   };
 }

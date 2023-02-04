@@ -1,10 +1,9 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
-
 class TaskForm extends Component {
   static propTypes = {
-    createTask: PropTypes.func.isRequired
+    createTask: PropTypes.func.isRequired,
   };
 
   constructor(props, context) {

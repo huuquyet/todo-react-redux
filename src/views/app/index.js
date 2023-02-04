@@ -7,26 +7,24 @@ import {authActions, getAuth} from 'src/core/auth';
 import {paths} from 'src/views/routes';
 import Header from 'src/views/components/header';
 
-
 export class App extends Component {
   static propTypes = {
     auth: PropTypes.object.isRequired,
     children: PropTypes.object.isRequired,
-    signOut: PropTypes.func.isRequired
+    signOut: PropTypes.func.isRequired,
   };
 
   static contextTypes = {
-    router: PropTypes.object.isRequired
+    router: PropTypes.object.isRequired,
   };
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     const {router} = this.context;
     const {auth} = this.props;
 
     if (auth.authenticated && !nextProps.auth.authenticated) {
       router.replace(paths.SIGN_IN);
-    }
-    else if (!auth.authenticated && nextProps.auth.authenticated) {
+    } else if (!auth.authenticated && nextProps.auth.authenticated) {
       router.replace(paths.TASKS);
     }
   }
@@ -45,17 +43,10 @@ export class App extends Component {
   }
 }
 
-
 //=====================================
 //  CONNECT
 //-------------------------------------
 
-const mapStateToProps = createSelector(
-  getAuth,
-  auth => ({auth})
-);
+const mapStateToProps = createSelector(getAuth, (auth) => ({auth}));
 
-export default connect(
-  mapStateToProps,
-  authActions
-)(App);
+export default connect(mapStateToProps, authActions)(App);

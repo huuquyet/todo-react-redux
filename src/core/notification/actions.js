@@ -1,10 +1,7 @@
-import {
-  DISMISS_NOTIFICATION
-} from './action-types';
-
+import {DISMISS_NOTIFICATION} from './action-types';
 
 export function dismissNotification() {
   return {
-    type: DISMISS_NOTIFICATION
+    type: DISMISS_NOTIFICATION,
   };
 }

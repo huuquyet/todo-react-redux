@@ -9,14 +9,13 @@
   line-height: 40px;
 }
 
-
 .header__title {
   @include fa-icon(circle-o);
   float: left;
   font-size: rem(14px);
   font-weight: 400;
   text-rendering: auto;
-  transform: translate(0,0);
+  transform: translate(0, 0);
 
   &:before {
     padding-right: 5px;
@@ -25,7 +24,6 @@
     line-height: 20px;
   }
 }
-
 
 .header__actions {
   @include clearfix;
@@ -62,9 +60,8 @@
     font-size: rem(14px);
     text-decoration: none;
     text-rendering: auto;
-    transform: translate(0,0);
+    transform: translate(0, 0);
   }
-
 
   .link--github {
     @include fa-icon(github);

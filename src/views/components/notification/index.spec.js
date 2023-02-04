@@ -4,7 +4,6 @@ import sinon from 'sinon';
 import {createTestComponent} from 'test/utils';
 import Notification from './index';
 
-
 describe('Notification', () => {
   let notification;
   let props;
@@ -15,7 +14,7 @@ describe('Notification', () => {
       actionLabel: 'actionLabel',
       dismiss: sinon.spy(),
       display: true,
-      message: 'message'
+      message: 'message',
     };
   });
 
@@ -23,7 +22,6 @@ describe('Notification', () => {
     // cleanup setTimeout
     notification.clearTimer();
   });
-
 
   describe('Mounting the component', () => {
     it('should invoke `startTimer()`', () => {
@@ -36,7 +34,6 @@ describe('Notification', () => {
     });
   });
 
-
   describe('Unmounting the component', () => {
     it('should invoke `clearTimer()`', () => {
       notification = createTestComponent(Notification, props);
@@ -46,7 +43,6 @@ describe('Notification', () => {
       expect(notification.clearTimer.callCount).toBe(1);
     });
   });
-
 
   describe('Receiving new props', () => {
     it('should re-start the timer if props.display === true', () => {
@@ -65,7 +61,6 @@ describe('Notification', () => {
       expect(notification.startTimer.callCount).toBe(0);
     });
   });
-
 
   describe('Starting timer', () => {
     it('should invoke `clearTimer()`', () => {
@@ -88,9 +83,8 @@ describe('Notification', () => {
     });
   });
 
-
   describe('Expired timer', () => {
-    it('should invoke `props.dismiss()`', done => {
+    it('should invoke `props.dismiss()`', (done) => {
       props.duration = 10;
       notification = createTestComponent(Notification, props);
 
@@ -100,7 +94,6 @@ describe('Notification', () => {
       }, 10);
     });
   });
-
 
   describe('DOM', () => {
     describe('message', () => {

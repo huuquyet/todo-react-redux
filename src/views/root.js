@@ -5,7 +5,6 @@ import {Router} from 'react-router';
 
 import {getRoutes} from './routes';
 
-
 export default function Root({history, store}) {
   return (
     <Provider store={store}>
@@ -16,5 +15,5 @@ export default function Root({history, store}) {
 
 Root.propTypes = {
   history: PropTypes.object.isRequired,
-  store: PropTypes.object.isRequired
+  store: PropTypes.object.isRequired,
 };

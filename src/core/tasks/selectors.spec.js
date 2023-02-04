@@ -4,7 +4,6 @@ import {TasksState} from './reducer';
 import {getVisibleTasks} from './selectors';
 import {Task} from './task';
 
-
 describe('tasks', () => {
   describe('selectors', () => {
     let tasks;
@@ -13,11 +12,10 @@ describe('tasks', () => {
       tasks = new TasksState({
         list: new List([
           new Task({completed: false, title: 'task-1'}),
-          new Task({completed: true, title: 'task-2'})
-        ])
+          new Task({completed: true, title: 'task-2'}),
+        ]),
       });
     });
-
 
     describe('getVisibleTasks()', () => {
       it('should return list of all tasks', () => {

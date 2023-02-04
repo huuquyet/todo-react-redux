@@ -9,7 +9,6 @@ Try the demo at https://todo-react-redux.firebaseapp.com
 
 A version of this app built with [redux-saga middleware](https://github.com/yelouafi/redux-saga) is available [here](https://github.com/r-park/todo-redux-saga).
 
-
 ## Stack
 
 - React
@@ -27,8 +26,7 @@ A version of this app built with [redux-saga middleware](https://github.com/yelo
 - SASS
 - Webpack
 
-Quick Start
------------
+## Quick Start
 
 ```shell
 $ git clone https://github.com/r-park/todo-react-redux.git
@@ -64,7 +62,7 @@ export const firebaseConfig = {
   apiKey: 'your api key',
   authDomain: 'your-project-id.firebaseapp.com',
   databaseURL: 'https://your-project-id.firebaseio.com',
-  storageBucket: 'your-project-id.appspot.com'
+  storageBucket: 'your-project-id.appspot.com',
 };
 ```
 
@@ -83,14 +81,13 @@ $ firebase use default
 $ firebase deploy
 ```
 
-NPM Commands
-------------
+## NPM Commands
 
-|Script|Description|
-|---|---|
-|npm start|Start webpack development server @ **localhost:3000**|
-|npm run build|Lint, test, and build the application to **./target**|
-|npm run lint|Lint **.js** files|
-|npm run server|Start express server @ **localhost:3000** to serve build artifacts from **./target** (must run **npm run build** first)|
-|npm test|Run unit tests with Karma and Jasmine|
-|npm run test:watch|Run unit tests with Karma and Jasmine; watch for changes to re-run tests|
+| Script          | Description                                                                                                             |
+| --------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| npm start       | Start webpack development server @ **localhost:3000**                                                                   |
+| npm run build   | Lint, test, and build the application to **./target**                                                                   |
+| npm run lint    | Lint **.js** files                                                                                                      |
+| npm run server  | Start express server @ **localhost:3000** to serve build artifacts from **./target** (must run **npm run build** first) |
+| npm test        | Run unit tests                                                                                                          |
+| npm run test:ci | Run unit tests with CI=true                                                                                             |

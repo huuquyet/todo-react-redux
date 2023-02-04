@@ -1,24 +1,10 @@
-@import
-"settings";
+@import 'settings';
 
-@import
-"~minx/src/settings",
-"~minx/src/functions",
-"~minx/src/mixins",
-"~minx/src/reset",
-"~minx/src/elements";
+@import '~minx/src/settings', '~minx/src/functions', '~minx/src/mixins', '~minx/src/reset',
+  '~minx/src/elements';
 
-@import
-"grid",
-'button',
-"header",
-"sign-in",
-"notification",
-"task-filters",
-"task-form",
-"task-item",
-"task-list";
-
+@import 'grid', 'button', 'header', 'sign-in', 'notification', 'task-filters', 'task-form',
+  'task-item', 'task-list';
 
 html {
   overflow-y: scroll;
@@ -38,5 +24,5 @@ a {
 }
 
 ::selection {
-  background: rgba(200,200,255,.1);
+  background: rgba(200, 200, 255, 0.1);
 }

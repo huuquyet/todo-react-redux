@@ -5,11 +5,9 @@ import {createTestComponent} from 'test/utils';
 import {Task} from 'src/core/tasks';
 import TaskItem from './index';
 
-
 describe('TaskItem', () => {
   let task;
   let taskItem;
-
 
   beforeEach(() => {
     task = new Task({completed: true, title: 'test'});
@@ -17,10 +15,9 @@ describe('TaskItem', () => {
     taskItem = createTestComponent(TaskItem, {
       task,
       deleteTask: sinon.spy(),
-      updateTask: sinon.spy()
+      updateTask: sinon.spy(),
     });
   });
-
 
   describe('Instantiation:', () => {
     it('should initialize #state.editing to be false', () => {
@@ -31,7 +28,6 @@ describe('TaskItem', () => {
       expect(taskItem.props.task instanceof Task).toBe(true);
     });
   });
-
 
   describe('Component methods:', () => {
     describe('#delete', () => {
@@ -68,7 +64,7 @@ describe('TaskItem', () => {
       it('should set #state.editing to `false`', () => {
         taskItem.state.editing = true;
         taskItem.saveTitle({
-          target: {value: ''}
+          target: {value: ''},
         });
         expect(taskItem.state.editing).toEqual(false);
       });
@@ -76,7 +72,7 @@ describe('TaskItem', () => {
       it('should call #taskActions.updateTask', () => {
         taskItem.state.editing = true;
         taskItem.saveTitle({
-          target: {value: 'foo'}
+          target: {value: 'foo'},
         });
         expect(taskItem.props.updateTask.callCount).toEqual(1);
         expect(taskItem.props.updateTask.args[0][0]).toEqual(task);
@@ -87,7 +83,7 @@ describe('TaskItem', () => {
     describe('#toggleStatus', () => {
       it('should call #taskActions.updateTask', () => {
         taskItem.toggleStatus({
-          target: {checked: true}
+          target: {checked: true},
         });
 
         expect(taskItem.props.updateTask.callCount).toEqual(1);
@@ -118,7 +114,6 @@ describe('TaskItem', () => {
     });
   });
 
-
   describe('DOM', () => {
     describe('`click` event triggered on toggle-status button', () => {
       it('should call #toggleStatus()', () => {
@@ -128,7 +123,6 @@ describe('TaskItem', () => {
         expect(taskItem.toggleStatus.callCount).toEqual(1);
       });
     });
-
 
     describe('title', () => {
       it('should be rendered as a text input field when editing', () => {
@@ -143,7 +137,6 @@ describe('TaskItem', () => {
         expect(element.innerText).toEqual(task.title);
       });
     });
-
 
     describe('`blur` event triggered on text field', () => {
       it('should call #saveTitle()', () => {
@@ -161,7 +154,6 @@ describe('TaskItem', () => {
       });
     });
 
-
     describe('`keyup` event triggered with enter key on text field', () => {
       it('should call #saveTitle()', () => {
         taskItem.saveTitle = sinon.spy();
@@ -177,7 +169,6 @@ describe('TaskItem', () => {
         expect(taskItem.titleText).toBeDefined();
       });
     });
-
 
     describe('`keyup` event triggered with escape key on text field', () => {
       it('should call #stopEditing()', () => {
@@ -195,7 +186,6 @@ describe('TaskItem', () => {
       });
     });
 
-
     describe('`click` event triggered on edit button', () => {
       it('should display text field', () => {
         Simulate.click(taskItem.editButton);
@@ -207,7 +197,6 @@ describe('TaskItem', () => {
         expect(taskItem.titleText).toBe(null);
       });
     });
-
 
     describe('`click` event triggered on delete button', () => {
       it('should call #delete()', () => {

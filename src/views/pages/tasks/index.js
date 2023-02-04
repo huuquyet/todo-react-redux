@@ -11,7 +11,6 @@ import TaskFilters from 'src/views/components/task-filters';
 import TaskForm from 'src/views/components/task-form';
 import TaskList from 'src/views/components/task-list';
 
-
 export class Tasks extends Component {
   static propTypes = {
     createTask: PropTypes.func.isRequired,
@@ -25,15 +24,15 @@ export class Tasks extends Component {
     tasks: PropTypes.instanceOf(List).isRequired,
     undeleteTask: PropTypes.func.isRequired,
     unloadTasks: PropTypes.func.isRequired,
-    updateTask: PropTypes.func.isRequired
+    updateTask: PropTypes.func.isRequired,
   };
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.loadTasks();
     this.props.filterTasks(this.props.location.query.filter);
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.location.query.filter !== this.props.location.query.filter) {
       this.props.filterTasks(nextProps.location.query.filter);
     }
@@ -78,7 +77,6 @@ export class Tasks extends Component {
   }
 }
 
-
 //=====================================
 //  CONNECT
 //-------------------------------------
@@ -90,17 +88,10 @@ const mapStateToProps = createSelector(
   (notification, filterType, tasks) => ({
     notification,
     filterType,
-    tasks
+    tasks,
   })
 );
 
-const mapDispatchToProps = Object.assign(
-  {},
-  tasksActions,
-  notificationActions
-);
+const mapDispatchToProps = Object.assign({}, tasksActions, notificationActions);
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Tasks);
+export default connect(mapStateToProps, mapDispatchToProps)(Tasks);

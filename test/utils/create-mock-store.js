@@ -1,9 +1,10 @@
 import {applyMiddleware} from 'redux';
 
-
 export function createMockStore(state, expectedActions, middleware, done) {
   if (!Array.isArray(expectedActions)) {
-    throw new Error('ERROR # createMockStore : `expectedActions` must be an array of expected actions.');
+    throw new Error(
+      'ERROR # createMockStore : `expectedActions` must be an array of expected actions.'
+    );
   }
 
   if (typeof done !== 'undefined' && typeof done !== 'function') {
@@ -34,7 +35,7 @@ export function createMockStore(state, expectedActions, middleware, done) {
 
       getState() {
         return typeof state === 'function' ? state() : state;
-      }
+      },
     };
   }
 

@@ -3,15 +3,13 @@ import App from './app';
 import SignIn from './pages/sign-in';
 import Tasks from './pages/tasks';
 
-
 export const paths = {
   ROOT: '/',
   SIGN_IN: '/sign-in',
-  TASKS: '/'
+  TASKS: '/',
 };
 
-
-const requireAuth = getState => {
+const requireAuth = (getState) => {
   return (nextState, replace) => {
     if (!isAuthenticated(getState())) {
       replace(paths.SIGN_IN);
@@ -19,7 +17,7 @@ const requireAuth = getState => {
   };
 };
 
-const requireUnauth = getState => {
+const requireUnauth = (getState) => {
   return (nextState, replace) => {
     if (isAuthenticated(getState())) {
       replace(paths.TASKS);
@@ -27,8 +25,7 @@ const requireUnauth = getState => {
   };
 };
 
-
-export const getRoutes = getState => {
+export const getRoutes = (getState) => {
   return {
     path: paths.ROOT,
     component: App,
@@ -36,14 +33,14 @@ export const getRoutes = getState => {
       {
         indexRoute: {
           component: Tasks,
-          onEnter: requireAuth(getState)
-        }
+          onEnter: requireAuth(getState),
+        },
       },
       {
         path: paths.SIGN_IN,
         component: SignIn,
-        onEnter: requireUnauth(getState)
-      }
-    ]
+        onEnter: requireUnauth(getState),
+      },
+    ],
   };
 };

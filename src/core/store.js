@@ -3,8 +3,7 @@ import thunk from 'redux-thunk';
 
 import reducers from './reducers';
 
-
-export default (initialState = {}) => {
+export default function configureAppStore(initialState = {}) {
   let middleware = applyMiddleware(thunk);
 
   if (process.env.NODE_ENV !== 'production') {
@@ -25,4 +24,4 @@ export default (initialState = {}) => {
   }
 
   return store;
-};
+}

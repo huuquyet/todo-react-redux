@@ -1,19 +1,9 @@
 {
-  "presets": [
-    "es2015",
-    "react",
-    "stage-0"
-  ],
+  "presets": ["@babel/preset-react", "@babel/preset-env"],
   "env": {
     "development": {
-      "plugins": [
-        "react-hot-loader/babel"
-      ]
-    },
-    "production": {
-      "presets": [
-        "react-optimize"
-      ]
+      "presets": [["@babel/preset-react", { "development": true }]]
     }
-  }
+  },
+  "plugins": ["@babel/plugin-proposal-function-bind"]
 }

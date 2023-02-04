@@ -9,12 +9,10 @@ import configureStore from './core/store';
 import Root from './views/root';
 import './views/styles/styles.scss';
 
-
 const store = configureStore();
 const syncedHistory = syncHistoryWithStore(browserHistory, store);
 const container = document.getElementById('root');
 const root = createRoot(container);
-
 
 function render(Root) {
   root.render(
@@ -32,4 +30,4 @@ if (module.hot) {
 
 initAuth(store.dispatch)
   .then(() => render(Root))
-  .catch(error => console.error(error)); // eslint-disable-line no-console
+  .catch((error) => console.error(error)); // eslint-disable-line no-console
