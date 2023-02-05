@@ -1,7 +1,6 @@
 import React from 'react';
-import classNames from 'classnames';
 import PropTypes from 'prop-types';
-
+import classNames from 'classnames';
 
 const Icon = ({className, name}) => {
   const cssClasses = classNames('material-icons', className);
@@ -10,8 +9,7 @@ const Icon = ({className, name}) => {
 
 Icon.propTypes = {
   className: PropTypes.string,
-  name: PropTypes.string.isRequired
+  name: PropTypes.string.isRequired,
 };
-
 
 export default Icon;

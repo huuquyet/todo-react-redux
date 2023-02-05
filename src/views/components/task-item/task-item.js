@@ -1,11 +1,10 @@
-import React, { Component } from 'react';
-import classNames from 'classnames';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import Button from '../button';
-import Icon from '../icon';
+import classNames from 'classnames';
 
-import './task-item.css';
-
+import Button from 'src/views/components/button';
+import Icon from 'src/views/components/icon';
+import './task-item.scss';
 
 export class TaskItem extends Component {
   constructor() {
@@ -28,8 +27,7 @@ export class TaskItem extends Component {
   handleKeyUp(event) {
     if (event.keyCode === 13) {
       this.save(event);
-    }
-    else if (event.keyCode === 27) {
+    } else if (event.keyCode === 27) {
       this.stopEditing();
     }
   }
@@ -40,7 +38,7 @@ export class TaskItem extends Component {
 
   save(event) {
     if (this.state.editing) {
-      const { task } = this.props;
+      const {task} = this.props;
       const title = event.target.value.trim();
 
       if (title.length && title !== task.title) {
@@ -56,7 +54,7 @@ export class TaskItem extends Component {
   }
 
   toggleStatus() {
-    const { task } = this.props;
+    const {task} = this.props;
     this.props.updateTask(task, {completed: !task.completed});
   }
 
@@ -83,19 +81,22 @@ export class TaskItem extends Component {
   }
 
   render() {
-    const { editing } = this.state;
-    const { task } = this.props;
+    const {editing} = this.state;
+    const {task} = this.props;
 
     let containerClasses = classNames('task-item', {
       'task-item--completed': task.completed,
-      'task-item--editing': editing
+      'task-item--editing': editing,
     });
 
     return (
       <div className={containerClasses} tabIndex="0">
         <div className="cell">
           <Button
-            className={classNames('btn--icon', 'task-item__button', {'active': task.completed, 'hide': editing})}
+            className={classNames('btn--icon', 'task-item__button', {
+              active: task.completed,
+              hide: editing,
+            })}
             onClick={this.toggleStatus}>
             <Icon name="done" />
           </Button>
@@ -107,17 +108,17 @@ export class TaskItem extends Component {
 
         <div className="cell">
           <Button
-            className={classNames('btn--icon', 'task-item__button', {'hide': editing})}
+            className={classNames('btn--icon', 'task-item__button', {hide: editing})}
             onClick={this.edit}>
             <Icon name="mode_edit" />
           </Button>
           <Button
-            className={classNames('btn--icon', 'task-item__button', {'hide': !editing})}
+            className={classNames('btn--icon', 'task-item__button', {hide: !editing})}
             onClick={this.stopEditing}>
             <Icon name="clear" />
           </Button>
           <Button
-            className={classNames('btn--icon', 'task-item__button', {'hide': editing})}
+            className={classNames('btn--icon', 'task-item__button', {hide: editing})}
             onClick={this.remove}>
             <Icon name="delete" />
           </Button>
@@ -130,8 +131,7 @@ export class TaskItem extends Component {
 TaskItem.propTypes = {
   removeTask: PropTypes.func.isRequired,
   task: PropTypes.object.isRequired,
-  updateTask: PropTypes.func.isRequired
+  updateTask: PropTypes.func.isRequired,
 };
-
 
 export default TaskItem;

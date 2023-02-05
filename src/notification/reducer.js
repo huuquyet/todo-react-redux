@@ -1,14 +1,13 @@
-import { Record } from 'immutable';
-import { REMOVE_TASK_SUCCESS } from 'src/tasks';
-import { DISMISS_NOTIFICATION } from './action-types';
+import {Record} from 'immutable';
 
+import {REMOVE_TASK_SUCCESS} from 'src/tasks';
+import {DISMISS_NOTIFICATION} from './action-types';
 
 export const NotificationState = new Record({
   actionLabel: '',
   display: false,
-  message: ''
+  message: '',
 });
-
 
 export function notificationReducer(state = new NotificationState(), action) {
   switch (action.type) {
@@ -16,7 +15,7 @@ export function notificationReducer(state = new NotificationState(), action) {
       return state.merge({
         actionLabel: 'Undo',
         display: true,
-        message: 'Task deleted'
+        message: 'Task deleted',
       });
 
     case DISMISS_NOTIFICATION:

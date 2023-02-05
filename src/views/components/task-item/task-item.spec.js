@@ -1,26 +1,23 @@
 import React from 'react';
-import { mount } from 'enzyme';
-import sinon from 'sinon';
-import { Task } from 'src/tasks';
-import { createTestComponent } from 'src/utils/create-test-component';
+import {mount} from 'enzyme';
+import {spy} from 'sinon';
+import {Task} from 'src/tasks';
+import {createTestComponent} from 'src/utils/create-test-component';
 import TaskItem from './task-item';
-
 
 describe('TaskItem', () => {
   let props;
   let task;
-
 
   beforeEach(() => {
     task = new Task({completed: true, title: 'test'});
 
     props = {
       task,
-      removeTask: sinon.spy(),
-      updateTask: sinon.spy()
+      removeTask: spy(),
+      updateTask: spy(),
     };
   });
-
 
   describe('component', () => {
     let taskItem;
@@ -28,7 +25,6 @@ describe('TaskItem', () => {
     beforeEach(() => {
       taskItem = createTestComponent(TaskItem, props);
     });
-
 
     describe('instantiation', () => {
       it('should initialize #state.editing to be false', () => {
@@ -40,8 +36,8 @@ describe('TaskItem', () => {
       });
     });
 
-    describe('#delete() method', () => {
-      it('should call #taskActions.deleteTask', () => {
+    describe('#remove() method', () => {
+      it('should call #taskActions.removeTask', () => {
         taskItem.remove();
         expect(taskItem.props.removeTask.callCount).toEqual(1);
         expect(taskItem.props.removeTask.calledWith(taskItem.props.task)).toEqual(true);
@@ -65,7 +61,7 @@ describe('TaskItem', () => {
 
     describe('#save() method', () => {
       it('should do nothing if not editing', () => {
-        taskItem.stopEditing = sinon.spy();
+        taskItem.stopEditing = spy();
         taskItem.state.editing = false;
         taskItem.save();
         expect(taskItem.stopEditing.callCount).toEqual(0);
@@ -74,7 +70,7 @@ describe('TaskItem', () => {
       it('should set #state.editing to `false`', () => {
         taskItem.state.editing = true;
         taskItem.save({
-          target: {value: ''}
+          target: {value: ''},
         });
         expect(taskItem.state.editing).toEqual(false);
       });
@@ -82,7 +78,7 @@ describe('TaskItem', () => {
       it('should call #taskActions.updateTask', () => {
         taskItem.state.editing = true;
         taskItem.save({
-          target: {value: 'foo'}
+          target: {value: 'foo'},
         });
         expect(taskItem.props.updateTask.callCount).toEqual(1);
         expect(taskItem.props.updateTask.args[0][0]).toEqual(task);
@@ -93,7 +89,7 @@ describe('TaskItem', () => {
     describe('#toggleStatus() method', () => {
       it('should call #taskActions.updateTask', () => {
         taskItem.toggleStatus({
-          target: {checked: true}
+          target: {checked: true},
         });
 
         expect(taskItem.props.updateTask.callCount).toEqual(1);
@@ -108,7 +104,7 @@ describe('TaskItem', () => {
     describe('#handleKeyUp() method', () => {
       describe('with enter key', () => {
         it('should call #save() with event object', () => {
-          taskItem.save = sinon.spy();
+          taskItem.save = spy();
           taskItem.handleKeyUp({keyCode: 13});
           expect(taskItem.save.callCount).toEqual(1);
         });
@@ -123,7 +119,6 @@ describe('TaskItem', () => {
       });
     });
   });
-
 
   describe('DOM', () => {
     describe('title', () => {
@@ -151,7 +146,6 @@ describe('TaskItem', () => {
         expect(titleText.text()).toBe('test');
       });
     });
-
 
     it('should set `onKeyUp` of input field to be #handleKeyUp()', () => {
       const wrapper = mount(<TaskItem {...props} />);

@@ -1,1 +1,1 @@
-export { default } from './require-unauth-route';
+export {default} from './require-unauth-route';

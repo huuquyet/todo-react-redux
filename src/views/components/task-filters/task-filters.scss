@@ -1,15 +1,14 @@
-@import 'views/styles/shared';
-
+@use 'src/views/styles/shared';
 
 .task-filters {
-  @include clearfix;
+  @extend clearfix !optional;
   margin-bottom: 45px;
   padding-left: 1px;
   font-size: rem(16px);
   line-height: 24px;
   list-style-type: none;
 
-  @include media-query(540) {
+  @media (min-width: 540px) {
     margin-bottom: 55px;
   }
 

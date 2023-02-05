@@ -1,5 +1,4 @@
-@import 'views/styles/shared';
-
+@use 'src/views/styles/shared';
 
 .header {
   padding: 10px 0;
@@ -17,7 +16,7 @@
   font-weight: 400;
   line-height: 40px;
   text-rendering: auto;
-  transform: translate(0,0);
+  transform: translate(0, 0);
 
   &:before {
     display: inline-block;
@@ -31,7 +30,7 @@
 }
 
 .header__actions {
-  @include clearfix;
+  @extend clearfix !optional;
   float: right;
   padding: 8px 0;
   line-height: 24px;

@@ -1,21 +1,18 @@
-import { routerMiddleware } from 'react-router-redux';
-import { applyMiddleware, compose, createStore } from 'redux';
+import {configureStore} from '@reduxjs/toolkit';
+import {routerMiddleware} from 'connected-react-router';
 import thunk from 'redux-thunk';
-import history from './history';
-import reducers from './reducers';
+import {createBrowserHistory} from 'history';
 
+import createRootReducer from './reducers';
 
-export default (initialState = {}) => {
-  let middleware = applyMiddleware(thunk, routerMiddleware(history));
+export const history = createBrowserHistory();
 
-  if (process.env.NODE_ENV !== 'production') {
-    const devToolsExtension = window.devToolsExtension;
-    if (typeof devToolsExtension === 'function') {
-      middleware = compose(middleware, devToolsExtension());
-    }
-  }
-
-  const store = createStore(reducers, initialState, middleware);
+export default function configureAppStore(preloadedState = {}) {
+  const store = configureStore({
+    reducer: createRootReducer(history), // root reducer with router state
+    middleware: [thunk, routerMiddleware(history)],
+    preloadedState,
+  });
 
   if (module.hot) {
     module.hot.accept('./reducers', () => {
@@ -24,4 +21,4 @@ export default (initialState = {}) => {
   }
 
   return store;
-};
+}

@@ -1,10 +1,9 @@
-@import 'views/styles/shared';
-
+@use 'src/views/styles/shared';
 
 .task-form {
   margin: 40px 0 10px;
 
-  @include media-query(540) {
+  @media (min-width: 540px) {
     margin: 80px 0 20px;
   }
 }
@@ -23,7 +22,7 @@
   color: #fff;
   background: transparent;
 
-  @include media-query(540) {
+  @media (min-width: 540px) {
     height: 61px;
     font-size: rem(32px);
   }

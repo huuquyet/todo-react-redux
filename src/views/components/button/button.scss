@@ -1,8 +1,7 @@
-@import 'views/styles/shared';
-
+@use 'src/views/styles/shared';
 
 .btn {
-  @include button-base;
+  @extend button-base !optional;
   outline: none;
   border: 0;
   padding: 0;

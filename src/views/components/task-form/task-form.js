@@ -1,12 +1,11 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
-import './task-form.css';
-
+import './task-form.scss';
 
 export class TaskForm extends Component {
   static propTypes = {
-    handleSubmit: PropTypes.func.isRequired
+    handleSubmit: PropTypes.func.isRequired,
   };
 
   constructor() {
@@ -49,7 +48,7 @@ export class TaskForm extends Component {
           onChange={this.handleChange}
           onKeyUp={this.handleKeyUp}
           placeholder="What needs to be done?"
-          ref={e => this.titleInput = e}
+          ref={(e) => (this.titleInput = e)}
           type="text"
           value={this.state.title}
         />
@@ -57,6 +56,5 @@ export class TaskForm extends Component {
     );
   }
 }
-
 
 export default TaskForm;

@@ -1,1 +1,1 @@
-export { default } from './tasks-page';
+export {default} from './tasks-page';

@@ -1,5 +1,4 @@
-@import
-'./settings',
-'minx/src/settings',
-'minx/src/functions',
-'minx/src/mixins';
+@use './mysettings';
+@use 'minx/src/settings';
+@use 'minx/src/functions';
+@use 'minx/src/mixins';

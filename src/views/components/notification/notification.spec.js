@@ -1,9 +1,9 @@
 import React from 'react';
-import { render, shallow } from 'enzyme';
+import {render, shallow} from 'enzyme';
 import sinon from 'sinon';
-import { createTestComponent } from 'src/utils/create-test-component';
-import Notification from './notification';
 
+import {createTestComponent} from 'src/utils/create-test-component';
+import Notification from './notification';
 
 describe('Notification', () => {
   let props;
@@ -14,10 +14,9 @@ describe('Notification', () => {
       actionLabel: 'actionLabel',
       dismiss: sinon.spy(),
       display: true,
-      message: 'message'
+      message: 'message',
     };
   });
-
 
   describe('component', () => {
     let notification;
@@ -26,7 +25,6 @@ describe('Notification', () => {
       // cleanup setTimeout
       notification.clearTimer();
     });
-
 
     describe('mounting', () => {
       it('should invoke `startTimer()`', () => {
@@ -39,7 +37,6 @@ describe('Notification', () => {
       });
     });
 
-
     describe('unmounting', () => {
       it('should invoke `clearTimer()`', () => {
         notification = createTestComponent(Notification, props);
@@ -49,7 +46,6 @@ describe('Notification', () => {
         expect(notification.clearTimer.callCount).toBe(1);
       });
     });
-
 
     describe('receiving new props', () => {
       it('should re-start the timer if props.display === true', () => {
@@ -68,7 +64,6 @@ describe('Notification', () => {
         expect(notification.startTimer.callCount).toBe(0);
       });
     });
-
 
     describe('starting the timer', () => {
       it('should invoke `clearTimer()`', () => {
@@ -91,9 +86,8 @@ describe('Notification', () => {
       });
     });
 
-
     describe('expired timer', () => {
-      it('should invoke `props.dismiss()`', done => {
+      it('should invoke `props.dismiss()`', (done) => {
         props.duration = 10;
         notification = createTestComponent(Notification, props);
 
@@ -104,7 +98,6 @@ describe('Notification', () => {
       });
     });
   });
-
 
   describe('DOM', () => {
     let wrapper;

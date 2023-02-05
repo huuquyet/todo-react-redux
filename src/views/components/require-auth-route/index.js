@@ -1,1 +1,1 @@
-export { default } from './require-auth-route';
+export {default} from './require-auth-route';

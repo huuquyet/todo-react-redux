@@ -68,7 +68,7 @@ config.plugins = [
 //-------------------------------------
 if (ENV_DEVELOPMENT || ENV_PRODUCTION) {
   config.entry = {
-    main: ['./src/main.js'],
+    main: ['./src/index.js'],
   };
 
   config.output = {
@@ -142,10 +142,10 @@ if (ENV_PRODUCTION) {
   config.entry.vendor = [
     'react',
     'react-dom',
-    'react-router',
-    'react-router-redux',
+    'react-router-dom',
+    'connected-react-router',
     'react-redux',
-    'redux',
+    '@reduxjs/toolkit',
     'redux-thunk',
     'core-js/stable',
     'regenerator-runtime/runtime',

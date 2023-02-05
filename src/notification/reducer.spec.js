@@ -1,14 +1,14 @@
-import { REMOVE_TASK_SUCCESS } from 'src/tasks/action-types';
-import { DISMISS_NOTIFICATION } from './action-types';
-import { notificationReducer } from './reducer';
+import {REMOVE_TASK_SUCCESS} from 'src/tasks';
+import {DISMISS_NOTIFICATION} from './action-types';
 
+import {notificationReducer} from './reducer';
 
 describe('Notification reducer', () => {
   describe('REMOVE_TASK_SUCCESS', () => {
     it('should return correct state', () => {
       let nextState = notificationReducer(undefined, {
         type: REMOVE_TASK_SUCCESS,
-        task: {}
+        task: {},
       });
 
       expect(nextState.actionLabel).toBe('Undo');
@@ -17,11 +17,10 @@ describe('Notification reducer', () => {
     });
   });
 
-
   describe('DISMISS_NOTIFICATION', () => {
     it('should return correct state', () => {
       let nextState = notificationReducer(undefined, {
-        type: DISMISS_NOTIFICATION
+        type: DISMISS_NOTIFICATION,
       });
 
       expect(nextState.actionLabel).toBe('');

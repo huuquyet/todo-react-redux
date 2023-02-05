@@ -1,7 +1,8 @@
 import React from 'react';
-import { render, shallow } from 'enzyme';
-import Button from './button';
+import {render, shallow} from 'enzyme';
+import {createSpy} from 'sinon';
 
+import Button from './button';
 
 describe('Button', () => {
   it('should render a button with text node', () => {
@@ -13,7 +14,11 @@ describe('Button', () => {
   });
 
   it('should render a button with child element', () => {
-    const wrapper = shallow(<Button><span>Foo</span></Button>);
+    const wrapper = shallow(
+      <Button>
+        <span>Foo</span>
+      </Button>
+    );
     const button = wrapper.find('button');
 
     expect(button.length).toBe(1);
@@ -49,7 +54,7 @@ describe('Button', () => {
   });
 
   it('should set onClick with provided props.onClick', () => {
-    const handleClick = jasmine.createSpy('handleClick');
+    const handleClick = createSpy('handleClick');
     const wrapper = shallow(<Button onClick={handleClick} />);
 
     wrapper.simulate('click');

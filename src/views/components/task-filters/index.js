@@ -1,1 +1,1 @@
-export { default } from './task-filters';
+export {default} from './task-filters';

@@ -1,4 +1,7 @@
-@import './shared', 'minx/src/reset', 'minx/src/elements', './grid';
+@use './shared';
+@use 'minx/src/reset';
+// @use 'minx/src/elements';
+@use './grid';
 
 html {
   overflow-y: scroll;

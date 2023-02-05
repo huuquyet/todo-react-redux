@@ -1,13 +1,16 @@
-import {combineReducers} from 'redux';
-import {routerReducer} from 'react-router-redux';
+import {combineReducers} from '@reduxjs/toolkit';
+import {connectRouter} from 'connected-react-router';
 
 import {authReducer} from './auth';
 import {notificationReducer} from './notification';
 import {tasksReducer} from './tasks';
 
-export default combineReducers({
-  auth: authReducer,
-  notification: notificationReducer,
-  routing: routerReducer,
-  tasks: tasksReducer,
-});
+const createRootReducer = (history) =>
+  combineReducers({
+    auth: authReducer,
+    notification: notificationReducer,
+    tasks: tasksReducer,
+    router: connectRouter(history),
+  });
+
+export default createRootReducer;

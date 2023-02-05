@@ -1,7 +1,7 @@
 import React from 'react';
-import { render, shallow } from 'enzyme';
-import Icon from './icon';
+import {render, shallow} from 'enzyme';
 
+import Icon from './icon';
 
 describe('Icon', () => {
   it('should render an icon', () => {

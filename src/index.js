@@ -1,45 +1,38 @@
-import './views/styles/styles.css';
-
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { ConnectedRouter } from 'react-router-redux';
+import {createRoot} from 'react-dom/client';
+import {Provider} from 'react-redux';
+import {ConnectedRouter} from 'connected-react-router';
 
-import { initAuth } from './auth';
-import history from './history';
-import configureStore from './store';
+import {initAuth} from './auth';
+import configureStore, {history} from './store';
 import registerServiceWorker from './utils/register-service-worker';
 import App from './views/app';
-
+import './views/styles/styles.scss';
 
 const store = configureStore();
-const rootElement = document.getElementById('root');
-
+const container = document.getElementById('root');
+const root = createRoot(container);
 
 function render(Component) {
-  ReactDOM.render(
+  root.render(
     <Provider store={store}>
       <ConnectedRouter history={history}>
-        <div>
-          <Component/>
-        </div>
+        <>
+          <Component />
+        </>
       </ConnectedRouter>
-    </Provider>,
-    rootElement
+    </Provider>
   );
 }
-
 
 if (module.hot) {
   module.hot.accept('./views/app', () => {
     render(require('./views/app').default);
-  })
+  });
 }
-
 
 registerServiceWorker();
 
-
 initAuth(store.dispatch)
   .then(() => render(App))
-  .catch(error => console.error(error));
+  .catch((error) => console.error(error));

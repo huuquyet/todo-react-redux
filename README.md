@@ -2,6 +2,7 @@
 [![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=anyulled/todo-react-redux)](https://dependabot.com)
 
 # Todo app with Create React App, React Redux, and Firebase
+
 A simple Todo app example with **undelete** capability — built with [Create React App](https://github.com/facebookincubator/create-react-app), [React Redux](https://github.com/reactjs/react-redux), and [Firebase](https://firebase.google.com/).
 
 Try the demo at https://todo-react-redux.firebaseapp.com
@@ -41,6 +42,7 @@ $ npm start
 - Configure the authentication providers for your Firebase project from your Firebase account console
 
 #### Configure this app with your project-specific details:
+
 ```json
 // .firebaserc
 
@@ -81,8 +83,8 @@ $ firebase deploy
 
 ## NPM Commands
 
-|Script|Description|
-|---|---|
-|`npm start`|Start webpack development server @ `localhost:3000`|
-|`npm run build`|Build the application to `./build` directory|
-|`npm test`|Test the application; watch for changes and retest|
+| Script          | Description                                         |
+| --------------- | --------------------------------------------------- |
+| `npm start`     | Start webpack development server @ `localhost:3000` |
+| `npm run build` | Build the application to `./target` directory       |
+| `npm test`      | Test the application; watch for changes and retest  |

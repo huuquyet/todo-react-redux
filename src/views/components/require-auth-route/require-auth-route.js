@@ -1,22 +1,22 @@
 import React from 'react';
-import { Route, Redirect } from 'react-router-dom'
-
+import {Route, Redirect} from 'react-router-dom';
 
 const RequireAuthRoute = ({component: Component, authenticated, ...rest}) => (
   <Route
     {...rest}
-    render={props => {
+    render={(props) => {
       return authenticated ? (
-        <Component {...props}/>
+        <Component {...props} />
       ) : (
-        <Redirect to={{
-          pathname: '/sign-in',
-          state: {from: props.location}
-        }}/>
-      )
+        <Redirect
+          to={{
+            pathname: '/sign-in',
+            state: {from: props.location},
+          }}
+        />
+      );
     }}
   />
 );
-
 
 export default RequireAuthRoute;

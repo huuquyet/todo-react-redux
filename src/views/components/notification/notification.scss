@@ -1,8 +1,7 @@
-@import 'views/styles/shared';
-
+@use 'src/views/styles/shared';
 
 .notification {
-  @include clearfix;
+  @extend clearfix !optional;
   position: fixed;
   left: 50%;
   top: 60px;

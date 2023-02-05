@@ -1,16 +1,15 @@
-import React, { Component } from 'react';
-import { List } from 'immutable';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { createSelector } from 'reselect';
+import {List} from 'immutable';
+import {connect} from 'react-redux';
+import {createSelector} from 'reselect';
 
-import { getNotification, notificationActions } from 'src/notification';
-import { getTaskFilter, getVisibleTasks, tasksActions } from 'src/tasks';
-import Notification from '../../components/notification';
-import TaskFilters from '../../components/task-filters';
-import TaskForm from '../../components/task-form';
-import TaskList from '../../components/task-list';
-
+import {getNotification, notificationActions} from 'src/notification';
+import {getTaskFilter, getVisibleTasks, tasksActions} from 'src/tasks';
+import Notification from 'src/views/components/notification';
+import TaskFilters from 'src/views/components/task-filters';
+import TaskForm from 'src/views/components/task-form';
+import TaskList from 'src/views/components/task-list';
 
 export class TasksPage extends Component {
   static propTypes = {
@@ -25,21 +24,17 @@ export class TasksPage extends Component {
     tasks: PropTypes.instanceOf(List).isRequired,
     undeleteTask: PropTypes.func.isRequired,
     unloadTasks: PropTypes.func.isRequired,
-    updateTask: PropTypes.func.isRequired
+    updateTask: PropTypes.func.isRequired,
   };
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.loadTasks();
-    this.props.filterTasks(
-      this.getFilterParam(this.props.location.search)
-    );
+    this.props.filterTasks(this.getFilterParam(this.props.location.search));
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.location.search !== this.props.location.search) {
-      this.props.filterTasks(
-        this.getFilterParam(nextProps.location.search)
-      );
+      this.props.filterTasks(this.getFilterParam(nextProps.location.search));
     }
   }
 
@@ -53,7 +48,7 @@ export class TasksPage extends Component {
   }
 
   renderNotification() {
-    const { notification } = this.props;
+    const {notification} = this.props;
     return (
       <Notification
         action={this.props.undeleteTask}
@@ -87,7 +82,6 @@ export class TasksPage extends Component {
   }
 }
 
-
 //=====================================
 //  CONNECT
 //-------------------------------------
@@ -99,17 +93,10 @@ const mapStateToProps = createSelector(
   (notification, filterType, tasks) => ({
     notification,
     filterType,
-    tasks
+    tasks,
   })
 );
 
-const mapDispatchToProps = Object.assign(
-  {},
-  tasksActions,
-  notificationActions
-);
+const mapDispatchToProps = Object.assign({}, tasksActions, notificationActions);
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(TasksPage);
+export default connect(mapStateToProps, mapDispatchToProps)(TasksPage);

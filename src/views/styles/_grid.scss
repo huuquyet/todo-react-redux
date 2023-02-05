@@ -1,8 +1,8 @@
 .g-row {
-  @include grid-row;
+  @extend grid-row !optional;
 }
 
 .g-col {
-  @include grid-column;
+  @extend grid-column !optional;
   width: 100%;
 }

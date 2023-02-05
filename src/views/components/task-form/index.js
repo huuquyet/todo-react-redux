@@ -1,1 +1,1 @@
-export { default } from './task-form';
+export {default} from './task-form';

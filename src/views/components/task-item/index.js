@@ -1,1 +1,1 @@
-export { default } from './task-item';
+export {default} from './task-item';

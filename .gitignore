@@ -1,11 +1,12 @@
 #======================================
 # Directories
 #--------------------------------------
+node_modules/
 build/
 dist/
 coverage/
-node_modules/
 tmp/
+target/
 .firebase/
 .env
 
