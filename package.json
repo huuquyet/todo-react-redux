@@ -1,6 +1,6 @@
 {
   "name": "todo-react-redux",
-  "version": "0.7.1",
+  "version": "0.7.2",
   "description": "Todo app with React, Redux, and Firebase",
   "homepage": "https://github.com/r-park/todo-react-redux",
   "repository": {
@@ -25,8 +25,8 @@
     "server": "cross-env NODE_ENV=development nodemon -w 'server/**/*.*' server/main.js",
     "server:dev": "cross-env NODE_ENV=development webpack-dev-server --progress",
     "start": "cross-env NODE_PATH=. npm run server:dev",
-    "test": "cross-env --env=jsdom NODE_PATH=. NODE_ENV=test react-scripts test",
-    "test:ci": "cross-env CI=true --env=jsdom NODE_PATH=. NODE_ENV=test react-scripts test",
+    "test": "cross-env NODE_PATH=. react-scripts test --env=jsdom",
+    "test:ci": "cross-env CI=true NODE_PATH=. react-scripts test --env=jsdom",
     "format": "prettier --write \"{,!(node_modules)/**/}*.+(js|jsx|json|yml|scss|md)\"",
     "snyk-protect": "snyk-protect",
     "prepublish": "npm run snyk-protect",

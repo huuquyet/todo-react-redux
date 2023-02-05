@@ -1,10 +1,4 @@
-@import 'settings';
-
-@import '~minx/src/settings', '~minx/src/functions', '~minx/src/mixins', '~minx/src/reset',
-  '~minx/src/elements';
-
-@import 'grid', 'button', 'header', 'sign-in', 'notification', 'task-filters', 'task-form',
-  'task-item', 'task-list';
+@import './shared', 'minx/src/reset', 'minx/src/elements', './grid';
 
 html {
   overflow-y: scroll;
