@@ -2,6 +2,7 @@ import React from 'react';
 import {List} from 'immutable';
 import PropTypes from 'prop-types';
 import TaskItem from 'src/views/components/task-item';
+import {Divider, Stack} from '@mui/material';
 
 function TaskList({removeTask, tasks, updateTask}) {
   let taskItems = tasks.map((task, index) => {
@@ -10,7 +11,7 @@ function TaskList({removeTask, tasks, updateTask}) {
     );
   });
 
-  return <div className="task-list">{taskItems}</div>;
+  return <Stack divider={<Divider />}>{taskItems}</Stack>;
 }
 
 TaskList.propTypes = {

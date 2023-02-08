@@ -1,5 +1,4 @@
 import {Simulate} from 'react-dom/test-utils';
-import {findDOMNode} from 'react-dom';
 import {spy} from 'sinon';
 import {createTestComponent} from 'src/utils/create-test-component';
 import TaskForm from './task-form';
@@ -117,14 +116,14 @@ describe('TaskForm', () => {
     describe('`submit` event triggered on form', () => {
       it('should prevent the default action of the event', () => {
         const event = {preventDefault: spy()};
-        Simulate.submit(findDOMNode(taskForm), event);
+        Simulate.submit(taskForm.current, event);
         expect(event.preventDefault.callCount).toEqual(1);
       });
 
       it('should set text field value with an empty string', () => {
         const event = {preventDefault: spy()};
         taskForm.setState({title: 'foo'});
-        Simulate.submit(findDOMNode(taskForm), event);
+        Simulate.submit(taskForm.current, event);
         expect(taskForm.titleInput.value).toEqual('');
       });
     });

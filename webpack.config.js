@@ -1,7 +1,6 @@
 const {LoaderOptionsPlugin, HotModuleReplacementPlugin} = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const {resolve} = require('path');
 
 //=========================================================
@@ -15,28 +14,6 @@ const ENV_TEST = NODE_ENV === 'test';
 
 const HOST = '0.0.0.0';
 const PORT = 3000;
-
-//=========================================================
-//  LOADERS
-//---------------------------------------------------------
-const loaders = {
-  js: {
-    test: /\.m?js$/i,
-    exclude: /node_modules/,
-    use: {
-      loader: 'babel-loader',
-      options: {presets: [['@babel/preset-env', {targets: 'defaults'}]]},
-    },
-  },
-  scss: {
-    test: /\.s[ac]ss$/i,
-    use: [
-      ENV_DEVELOPMENT ? 'style-loader' : MiniCssExtractPlugin.loader,
-      'css-loader',
-      'sass-loader',
-    ],
-  },
-};
 
 //=========================================================
 //  CONFIG
@@ -83,7 +60,9 @@ if (ENV_DEVELOPMENT || ENV_PRODUCTION) {
       filename: 'index.html',
       hash: false,
       inject: 'body',
-      template: './src/index.html',
+      template: resolve('./public/index.html'),
+      favicon: './public/favicon.ico',
+      manifest: './public/manifest.json',
     })
   );
 }
@@ -103,7 +82,16 @@ if (ENV_DEVELOPMENT) {
   );
 
   config.module = {
-    rules: [loaders.js, loaders.scss],
+    rules: [
+      {
+        test: /\.m?js$/i,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {presets: [['@babel/preset-env', {targets: 'defaults'}]]},
+        },
+      },
+    ],
   };
 
   config.plugins.push(new HotModuleReplacementPlugin());
@@ -157,15 +145,17 @@ if (ENV_PRODUCTION) {
   config.output.filename = '[name].[contenthash].js';
 
   config.module = {
-    rules: [loaders.js, loaders.scss],
+    rules: [
+      {
+        test: /\.m?js$/i,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {presets: [['@babel/preset-env', {targets: 'defaults'}]]},
+        },
+      },
+    ],
   };
-
-  config.plugins.push(
-    new MiniCssExtractPlugin({
-      filename: '[name].css',
-      chunkFilename: 'styles.[contenthash].css',
-    })
-  );
 
   config.optimization = {
     splitChunks: {
@@ -186,6 +176,15 @@ if (ENV_TEST) {
   config.devtool = 'inline-source-map';
 
   config.module = {
-    rules: [loaders.js, loaders.scss],
+    rules: [
+      {
+        test: /\.m?js$/i,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {presets: [['@babel/preset-env', {targets: 'defaults'}]]},
+        },
+      },
+    ],
   };
 }

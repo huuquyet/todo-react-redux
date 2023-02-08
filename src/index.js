@@ -7,7 +7,6 @@ import {initAuth} from './auth';
 import configureStore, {history} from './store';
 import registerServiceWorker from './utils/register-service-worker';
 import App from './views/app';
-import './views/styles/styles.scss';
 
 const store = configureStore();
 const container = document.getElementById('root');

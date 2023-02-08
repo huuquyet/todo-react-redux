@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {List} from 'immutable';
 import {connect} from 'react-redux';
 import {createSelector} from 'reselect';
+import {Stack} from '@mui/material';
 
 import {getNotification, notificationActions} from 'src/notification';
 import {getTaskFilter, getVisibleTasks, tasksActions} from 'src/tasks';
@@ -62,22 +63,19 @@ export class TasksPage extends Component {
 
   render() {
     return (
-      <div className="g-row">
-        <div className="g-col">
-          <TaskForm handleSubmit={this.props.createTask} />
-        </div>
+      <Stack direction="column" spacing={3}>
+        <TaskForm handleSubmit={this.props.createTask} />
 
-        <div className="g-col">
-          <TaskFilters filter={this.props.filterType} />
-          <TaskList
-            removeTask={this.props.removeTask}
-            tasks={this.props.tasks}
-            updateTask={this.props.updateTask}
-          />
-        </div>
+        <TaskFilters filter={this.props.filterType} />
+
+        <TaskList
+          removeTask={this.props.removeTask}
+          tasks={this.props.tasks}
+          updateTask={this.props.updateTask}
+        />
 
         {this.props.notification.display ? this.renderNotification() : null}
-      </div>
+      </Stack>
     );
   }
 }

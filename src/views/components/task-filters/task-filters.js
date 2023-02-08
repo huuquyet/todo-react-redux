@@ -1,31 +1,34 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {NavLink} from 'react-router-dom';
+import {Link, Stack, Typography} from '@mui/material';
 
-import './task-filters.scss';
+const LinkBehavior = React.forwardRef((props, ref) => (
+  <NavLink ref={ref} {...props} role={undefined} />
+));
 
 const TaskFilters = ({filter}) => (
-  <ul className="task-filters">
-    <li>
-      <NavLink isActive={() => !filter} to="/">
-        View All
-      </NavLink>
-    </li>
-    <li>
-      <NavLink
-        isActive={() => filter === 'active'}
-        to={{pathname: '/', search: '?filter=active'}}>
-        Active
-      </NavLink>
-    </li>
-    <li>
-      <NavLink
-        isActive={() => filter === 'completed'}
-        to={{pathname: '/', search: '?filter=completed'}}>
+  <Stack direction="row" spacing={2} sx={{mb: 4}}>
+    <Link component={LinkBehavior} to="/" color="inherit" underline="none">
+      <Typography sx={{fontWeight: !filter ? 'bold' : ''}}>View All</Typography>
+    </Link>
+    <Link
+      component={LinkBehavior}
+      color="inherit"
+      underline="none"
+      to={{pathname: '/', search: '?filter=active'}}>
+      <Typography sx={{fontWeight: filter === 'active' ? 'bold' : ''}}>Active</Typography>
+    </Link>
+    <Link
+      component={LinkBehavior}
+      color="inherit"
+      underline="none"
+      to={{pathname: '/', search: '?filter=completed'}}>
+      <Typography sx={{fontWeight: filter === 'completed' ? 'bold' : ''}}>
         Completed
-      </NavLink>
-    </li>
-  </ul>
+      </Typography>
+    </Link>
+  </Stack>
 );
 
 TaskFilters.propTypes = {

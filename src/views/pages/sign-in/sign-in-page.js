@@ -2,27 +2,41 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
-import {authActions} from 'src/auth';
-import Button from 'src/views/components/button';
+import {Button, Stack, Typography} from '@mui/material';
 
-import './sign-in-page.scss';
+import {authActions} from 'src/auth';
 
 const SignInPage = ({signInWithGithub, signInWithGoogle, signInWithTwitter}) => {
   return (
-    <div className="g-row sign-in">
-      <div className="g-col">
-        <h1 className="sign-in__heading">Sign in</h1>
-        <Button className="sign-in__button" onClick={signInWithGithub}>
-          GitHub
-        </Button>
-        <Button className="sign-in__button" onClick={signInWithGoogle}>
-          Google
-        </Button>
-        <Button className="sign-in__button" onClick={signInWithTwitter}>
-          Twitter
-        </Button>
-      </div>
-    </div>
+    <Stack
+      direction="column"
+      spacing={3}
+      justifyContent="center"
+      alignItems="center"
+      sx={{height: '100vh'}}>
+      <Typography variant="h3">Sign in</Typography>
+      <Button
+        variant="outlined"
+        size="large"
+        sx={{width: 1 / 2}}
+        onClick={signInWithGithub}>
+        GitHub
+      </Button>
+      <Button
+        variant="outlined"
+        size="large"
+        sx={{width: 1 / 2}}
+        onClick={signInWithGoogle}>
+        Google
+      </Button>
+      <Button
+        variant="outlined"
+        size="large"
+        sx={{width: 1 / 2}}
+        onClick={signInWithTwitter}>
+        Twitter
+      </Button>
+    </Stack>
   );
 };
 

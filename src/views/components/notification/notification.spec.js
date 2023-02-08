@@ -51,7 +51,7 @@ describe('Notification', () => {
       it('should re-start the timer if props.display === true', () => {
         notification = createTestComponent(Notification, props);
         sinon.spy(notification, 'startTimer');
-        notification.componentWillReceiveProps({display: true});
+        notification.UNSAFE_componentWillReceiveProps({display: true});
 
         expect(notification.startTimer.callCount).toBe(1);
       });
@@ -59,7 +59,7 @@ describe('Notification', () => {
       it('should NOT re-start the timer if props.display === false', () => {
         notification = createTestComponent(Notification, props);
         sinon.spy(notification, 'startTimer');
-        notification.componentWillReceiveProps({display: false});
+        notification.UNSAFE_componentWillReceiveProps({display: false});
 
         expect(notification.startTimer.callCount).toBe(0);
       });

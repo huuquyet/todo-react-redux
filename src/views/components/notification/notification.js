@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-
-import './notification.scss';
+import {Alert, Button} from '@mui/material';
 
 class Notification extends Component {
   static propTypes = {
@@ -42,18 +41,15 @@ class Notification extends Component {
 
   render() {
     return (
-      <div className="notification">
-        <p className="notification__message" ref={(c) => (this.message = c)}>
-          {this.props.message}
-        </p>
-        <button
-          className="btn notification__button"
-          onClick={this.props.action}
-          ref={(c) => (this.button = c)}
-          type="button">
-          {this.props.actionLabel}
-        </button>
-      </div>
+      <Alert
+        sx={{position: 'fixed', left: '33%', top: 60, width: 1 / 3}}
+        action={
+          <Button onClick={this.props.action} color="inherit" size="small">
+            {this.props.actionLabel}
+          </Button>
+        }>
+        {this.props.message}
+      </Alert>
     );
   }
 }

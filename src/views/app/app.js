@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
+import {ThemeProvider, createTheme} from '@mui/material/styles';
+import {Container, CssBaseline} from '@mui/material';
 
 import {authActions, getAuth} from 'src/auth';
 import Header from 'src/views/components/header';
@@ -10,11 +12,18 @@ import RequireUnauthRoute from 'src/views/components/require-unauth-route';
 import SignInPage from 'src/views/pages/sign-in';
 import TasksPage from 'src/views/pages/tasks';
 
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+  },
+});
+
 const App = ({authenticated, signOut}) => (
-  <div>
+  <ThemeProvider theme={darkTheme}>
+    <CssBaseline />
     <Header authenticated={authenticated} signOut={signOut} />
 
-    <main>
+    <Container maxWidth="sm">
       <RequireAuthRoute
         authenticated={authenticated}
         exact
@@ -26,8 +35,8 @@ const App = ({authenticated, signOut}) => (
         path="/sign-in"
         component={SignInPage}
       />
-    </main>
-  </div>
+    </Container>
+  </ThemeProvider>
 );
 
 App.propTypes = {

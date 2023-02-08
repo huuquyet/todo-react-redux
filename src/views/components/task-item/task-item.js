@@ -1,16 +1,18 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
-
-import Button from 'src/views/components/button';
-import Icon from 'src/views/components/icon';
-import './task-item.scss';
+import {Box, IconButton, Stack, TextField, Tooltip, Typography} from '@mui/material';
+import CancelIcon from '@mui/icons-material/Cancel';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import DeleteIcon from '@mui/icons-material/Delete';
+import ModeEditIcon from '@mui/icons-material/ModeEdit';
 
 export class TaskItem extends Component {
   constructor() {
     super(...arguments);
 
     this.state = {editing: false};
+    this.titleInput = React.createRef();
 
     this.edit = this.edit.bind(this);
     this.handleKeyUp = this.handleKeyUp.bind(this);
@@ -60,22 +62,33 @@ export class TaskItem extends Component {
 
   renderTitle(task) {
     return (
-      <div className="task-item__title" tabIndex="0">
+      <Typography
+        variant="body1"
+        onClick={this.toggleStatus}
+        sx={{
+          flexGrow: 1,
+          fontSize: 22,
+          textDecoration: task.completed ? 'line-through' : 'none',
+        }}>
         {task.title}
-      </div>
+      </Typography>
     );
   }
 
   renderTitleInput(task) {
     return (
-      <input
-        autoComplete="off"
+      <TextField
+        fullWidth
+        variant="standard"
         autoFocus
-        className="task-item__input"
         defaultValue={task.title}
         maxLength="64"
         onKeyUp={this.handleKeyUp}
-        type="text"
+        label="Edit task"
+        InputProps={{
+          sx: {fontSize: 22},
+        }}
+        inputRef={this.titleInput}
       />
     );
   }
@@ -84,46 +97,54 @@ export class TaskItem extends Component {
     const {editing} = this.state;
     const {task} = this.props;
 
-    let containerClasses = classNames('task-item', {
-      'task-item--completed': task.completed,
-      'task-item--editing': editing,
-    });
-
     return (
-      <div className={containerClasses} tabIndex="0">
-        <div className="cell">
-          <Button
-            className={classNames('btn--icon', 'task-item__button', {
-              active: task.completed,
-              hide: editing,
-            })}
+      <Stack direction="row" spacing={2} alignItems="center">
+        <Tooltip title="Task completed?">
+          <IconButton
+            aria-label="Status"
+            sx={{visibility: editing ? 'hidden' : 'visible'}}
             onClick={this.toggleStatus}>
-            <Icon name="done" />
-          </Button>
-        </div>
+            {task.completed ? (
+              <CheckCircleIcon fontSize="large" />
+            ) : (
+              <CheckCircleOutlineIcon fontSize="large" />
+            )}
+          </IconButton>
+        </Tooltip>
 
-        <div className="cell">
+        <Box sx={{flexGrow: 1}}>
           {editing ? this.renderTitleInput(task) : this.renderTitle(task)}
-        </div>
+        </Box>
+        {/* <Tooltip title='Save'><IconButton aria-label="Save" sx={{display: !editing ? 'none' : 'block'}}
+           onClick={this.save}>
+            <CheckCircleOutlineIcon fontSize='large'/></IconButton></Tooltip> */}
 
-        <div className="cell">
-          <Button
-            className={classNames('btn--icon', 'task-item__button', {hide: editing})}
+        <Tooltip title="Edit task">
+          <IconButton
+            aria-label="Edit task"
+            sx={{display: editing ? 'none' : 'block'}}
             onClick={this.edit}>
-            <Icon name="mode_edit" />
-          </Button>
-          <Button
-            className={classNames('btn--icon', 'task-item__button', {hide: !editing})}
+            <ModeEditIcon fontSize="large" />
+          </IconButton>
+        </Tooltip>
+        <Tooltip title="Cancel">
+          <IconButton
+            aria-label="Cancel"
+            sx={{display: !editing ? 'none' : 'block'}}
             onClick={this.stopEditing}>
-            <Icon name="clear" />
-          </Button>
-          <Button
-            className={classNames('btn--icon', 'task-item__button', {hide: editing})}
+            <CancelIcon fontSize="large" />
+          </IconButton>
+        </Tooltip>
+
+        <Tooltip title="Delete task">
+          <IconButton
+            aria-label="Delete task"
+            sx={{visibility: editing ? 'hidden' : 'visible'}}
             onClick={this.remove}>
-            <Icon name="delete" />
-          </Button>
-        </div>
-      </div>
+            <DeleteIcon fontSize="large" />
+          </IconButton>
+        </Tooltip>
+      </Stack>
     );
   }
 }

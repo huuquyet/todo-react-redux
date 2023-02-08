@@ -1,33 +1,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
-import Button from 'src/views/components/button';
-import GitHubLogo from 'src/views/components/github-logo';
-import './header.scss';
+import {AppBar, Divider, IconButton, Toolbar, Tooltip, Typography} from '@mui/material';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 const Header = ({authenticated, signOut}) => (
-  <header className="header">
-    <div className="g-row">
-      <div className="g-col">
-        <h1 className="header__title">Todo React Redux</h1>
-
-        <ul className="header__actions">
-          {authenticated ? (
-            <li>
-              <Button onClick={signOut}>Sign out</Button>
-            </li>
-          ) : null}
-          <li>
-            <a
-              className="link link--github"
-              href="https://github.com/r-park/todo-react-redux">
-              <GitHubLogo />
-            </a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </header>
+  <AppBar position="fixed">
+    <Toolbar>
+      <Typography variant="h4" sx={{flexGrow: 1}} noWrap>
+        Todo React Redux
+      </Typography>
+      <Tooltip title="Sign out">
+        <IconButton
+          aria-label="Sign out"
+          onClick={signOut}
+          sx={{visibility: authenticated ? 'visible' : 'hidden'}}>
+          <LogoutIcon fontSize="large" />
+        </IconButton>
+      </Tooltip>
+      <Divider orientation="vertical" flexItem />
+      <Tooltip title="Github">
+        <IconButton href="https://github.com/r-park/todo-react-redux" aria-label="Github">
+          <GitHubIcon fontSize="large" />
+        </IconButton>
+      </Tooltip>
+    </Toolbar>
+  </AppBar>
 );
 
 Header.propTypes = {
