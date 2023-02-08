@@ -81,7 +81,7 @@
     "lint": "eslint \"{,!(node_modules)/**/}*.+(js|jsx)\"",
     "lint:fix": "eslint \"{,!(node_modules)/**/}*.+(js|jsx)\" --fix",
     "prebuild": "run-s clean lint:fix format",
-    "server": "cross-env NODE_ENV=development nodemon -w 'server/**/*.*' server/main.js",
+    "server": "cross-env NODE_ENV=development nodemon -w 'public/**/*.*' public/main.js",
     "server:dev": "cross-env NODE_ENV=development webpack-dev-server --progress",
     "start": "cross-env NODE_PATH=. npm run server:dev",
     "test": "cross-env NODE_PATH=. react-scripts test --env=jsdom",

@@ -1,5 +1,5 @@
-import express, {Router} from 'express';
-import {error as _error, info} from 'winston';
+const express = require('express');
+const logger = require('winston');
 
 //=========================================================
 //  SETUP
@@ -16,12 +16,12 @@ app.set('host', process.env.HOST || 'localhost');
 app.set('port', process.env.PORT || 3000);
 
 app.use(require('morgan')('dev'));
-app.use(require(STATIC_DIR));
+app.use(express.static(STATIC_DIR));
 
 //=========================================================
 //  ROUTER
 //---------------------------------------------------------
-const router = new Router();
+const router = new express.Router();
 
 router.get('*', (req, res) => {
   res.sendFile(`${STATIC_DIR}/index.html`);
@@ -34,8 +34,8 @@ app.use(router);
 //---------------------------------------------------------
 app.listen(PORT, HOST, (error) => {
   if (error) {
-    _error(error);
+    logger.error(error);
   } else {
-    info(`Server listening @ ${HOST}:${PORT}`);
+    logger.info(`Server listening @ ${HOST}:${PORT}`);
   }
 });

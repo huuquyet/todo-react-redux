@@ -1,4 +1,4 @@
-const {LoaderOptionsPlugin, HotModuleReplacementPlugin} = require('webpack');
+const {HotModuleReplacementPlugin} = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 const {resolve} = require('path');
@@ -26,19 +26,7 @@ config.resolve = {
   modules: [resolve('.'), 'node_modules'],
 };
 
-config.plugins = [
-  new Dotenv(),
-  new LoaderOptionsPlugin({
-    // test: /\.xxx$/, // may apply this only for some modules
-    options: {
-      sassLoader: {
-        outputStyle: 'compressed',
-        precision: 10,
-        sourceComments: false,
-      },
-    },
-  }),
-];
+config.plugins = [new Dotenv()];
 
 //=====================================
 //  DEVELOPMENT or PRODUCTION
@@ -51,7 +39,7 @@ if (ENV_DEVELOPMENT || ENV_PRODUCTION) {
   config.output = {
     filename: '[name].js',
     path: resolve('./target'),
-    publicPath: '/',
+    publicPath: './',
   };
 
   config.plugins.push(
@@ -127,20 +115,7 @@ if (ENV_DEVELOPMENT) {
 if (ENV_PRODUCTION) {
   config.devtool = 'source-map';
 
-  config.entry.vendor = [
-    'react',
-    'react-dom',
-    'react-router-dom',
-    'connected-react-router',
-    'react-redux',
-    '@reduxjs/toolkit',
-    'redux-thunk',
-    'core-js/stable',
-    'regenerator-runtime/runtime',
-    'firebase/compat/app',
-    'immutable',
-    'reselect',
-  ];
+  config.entry.vendor = './src/vendor.js';
 
   config.output.filename = '[name].[contenthash].js';
 
