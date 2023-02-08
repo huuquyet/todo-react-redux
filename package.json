@@ -1,11 +1,11 @@
 {
   "name": "todo-react-redux",
-  "version": "0.7.2",
+  "version": "0.7.3",
   "description": "Todo app with React, Redux, and Firebase",
-  "homepage": "https://github.com/r-park/todo-react-redux",
+  "homepage": "https://huuquyet.github.io/todo-react-redux",
   "repository": {
     "type": "git",
-    "url": "https://github.com/r-park/todo-react-redux.git"
+    "url": "https://github.com/huuquyet/todo-react-redux.git"
   },
   "author": {
     "name": "Richard Park",
@@ -53,7 +53,7 @@
       "prettier"
     ],
     "ignorePatterns": [
-      "target"
+      "build"
     ],
     "globals": {
       "firebase": true,
@@ -70,27 +70,33 @@
     "tabWidth": 2,
     "useTabs": false
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+      "prettier --write"
+    ]
+  },
   "snyk": true,
-  "browserLists": [
-    "last 3 versions",
-    "> 0.25%, not dead"
-  ],
   "scripts": {
-    "build": "cross-env NODE_ENV=production NODE_PATH=. webpack --progress",
-    "clean": "del-cli target",
-    "lint": "eslint \"{,!(node_modules)/**/}*.+(js|jsx)\"",
-    "lint:fix": "eslint \"{,!(node_modules)/**/}*.+(js|jsx)\" --fix",
-    "prebuild": "run-s clean lint:fix format",
-    "server": "cross-env NODE_ENV=development nodemon -w 'public/**/*.*' public/main.js",
-    "server:dev": "cross-env NODE_ENV=development webpack-dev-server --progress",
-    "start": "cross-env NODE_PATH=. npm run server:dev",
-    "test": "cross-env NODE_PATH=. react-scripts test --env=jsdom",
-    "test:ci": "cross-env CI=true NODE_PATH=. react-scripts test --env=jsdom",
-    "format": "prettier --write \"{,!(node_modules)/**/}*.+(js|jsx|json|yml|md)\"",
-    "snyk-protect": "snyk-protect",
-    "prepublish": "npm run snyk-protect",
+    "eject": "react-scripts eject",
+    "build": "cross-env NODE_PATH=. react-scripts build",
+    "deploy": "gh-pages -d build",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,scss,md}\"",
+    "lint": "eslint \"**/*.+(js|jsx)\"",
+    "lint:fix": "eslint \"**/*.+(js|jsx)\" --fix",
+    "prebuild": "npm run lint:fix && npm run format",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d target"
+    "prepublish": "npm run snyk-protect",
+    "server": "cross-env NODE_ENV=development webpack --progress",
+    "server:dev": "cross-env NODE_ENV=development webpack-dev-server --progress",
+    "snyk-protect": "snyk-protect",
+    "start": "cross-env NODE_PATH=. react-scripts start",
+    "test": "cross-env NODE_PATH=. react-scripts test --env=jsdom",
+    "test:ci": "cross-env NODE_PATH=. CI=true react-scripts test --env=jsdom"
   },
   "dependencies": {
     "@mui/icons-material": "^5.11.0",
@@ -119,7 +125,6 @@
     "@snyk/protect": "^1.1096.0",
     "babel-loader": "^9.1.2",
     "cross-env": "^7.0.3",
-    "del-cli": "^5.0.0",
     "dotenv-webpack": "^8.0.1",
     "enzyme": "^3.11.0",
     "eslint": "^8.33.0",
@@ -129,9 +134,8 @@
     "gh-pages": "^5.0.0",
     "history": "^4.10.1",
     "html-webpack-plugin": "^5.5.0",
-    "morgan": "^1.10.0",
-    "nodemon": "^2.0.20",
-    "npm-run-all": "^4.1.5",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.1.1",
     "prettier": "^2.8.3",
     "prop-types": "^15.8.1",
     "react-hot-loader": "^4.13.1",
@@ -139,7 +143,18 @@
     "sinon": "^15.0.1",
     "webpack": "^5.75.0",
     "webpack-cli": "^5.0.1",
-    "webpack-dev-server": "^4.11.1",
-    "winston": "^3.8.2"
+    "webpack-dev-server": "^4.11.1"
+  },
+  "browserslist": {
+    "production": [
+      ">0.25%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }

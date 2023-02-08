@@ -1,41 +1,11 @@
 const express = require('express');
-const logger = require('winston');
-
-//=========================================================
-//  SETUP
-//---------------------------------------------------------
-const PROJECT_ROOT_DIR = process.cwd();
-const STATIC_DIR = `${PROJECT_ROOT_DIR}/target`;
-
-const HOST = '0.0.0.0';
-const PORT = 3000;
-
+const path = require('path');
 const app = express();
 
-app.set('host', process.env.HOST || 'localhost');
-app.set('port', process.env.PORT || 3000);
+app.use(express.static(path.join(__dirname, 'build')));
 
-app.use(require('morgan')('dev'));
-app.use(express.static(STATIC_DIR));
-
-//=========================================================
-//  ROUTER
-//---------------------------------------------------------
-const router = new express.Router();
-
-router.get('*', (req, res) => {
-  res.sendFile(`${STATIC_DIR}/index.html`);
+app.get('/*', function (req, res) {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
-app.use(router);
-
-//=========================================================
-//  START SERVER
-//---------------------------------------------------------
-app.listen(PORT, HOST, (error) => {
-  if (error) {
-    logger.error(error);
-  } else {
-    logger.info(`Server listening @ ${HOST}:${PORT}`);
-  }
-});
+app.listen(9000);

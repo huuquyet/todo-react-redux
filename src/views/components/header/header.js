@@ -20,7 +20,9 @@ const Header = ({authenticated, signOut}) => (
       </Tooltip>
       <Divider orientation="vertical" flexItem />
       <Tooltip title="Github">
-        <IconButton href="https://github.com/r-park/todo-react-redux" aria-label="Github">
+        <IconButton
+          href="https://github.com/huuquyet/todo-react-redux"
+          aria-label="Github">
           <GitHubIcon fontSize="large" />
         </IconButton>
       </Tooltip>
