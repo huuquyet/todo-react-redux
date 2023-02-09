@@ -1,0 +1,11 @@
+{
+  "files": {
+    "main.js": "/todo-react-redux/static/js/main.788a3fc5.js",
+    "service-worker.js": "/todo-react-redux/service-worker.js",
+    "index.html": "/todo-react-redux/index.html",
+    "main.788a3fc5.js.map": "/todo-react-redux/static/js/main.788a3fc5.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.788a3fc5.js"
+  ]
+}
