@@ -1,11 +1,11 @@
 {
   "name": "todo-react-redux",
-  "version": "0.7.1",
+  "version": "0.7.3",
   "description": "Todo app with React, Redux, and Firebase",
-  "homepage": "https://github.com/r-park/todo-react-redux",
+  "homepage": "https://huuquyet.github.io/todo-react-redux",
   "repository": {
     "type": "git",
-    "url": "https://github.com/r-park/todo-react-redux.git"
+    "url": "https://github.com/huuquyet/todo-react-redux.git"
   },
   "author": {
     "name": "Richard Park",
@@ -14,79 +14,112 @@
   "license": "MIT",
   "private": true,
   "engines": {
-    "node": ">=8.9"
+    "node": ">=10.13"
   },
+  "eslintConfig": {
+    "root": true,
+    "extends": [
+      "eslint:recommended",
+      "react-app",
+      "plugin:prettier/recommended"
+    ],
+    "parser": "@babel/eslint-parser",
+    "parserOptions": {
+      "ecmaVersion": 6,
+      "sourceType": "module"
+    },
+    "plugins": [
+      "prettier"
+    ],
+    "ignorePatterns": [
+      "build"
+    ],
+    "globals": {
+      "firebase": true,
+      "sinon": true
+    }
+  },
+  "prettier": {
+    "bracketSameLine": true,
+    "bracketSpacing": false,
+    "printWidth": 90,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "es5",
+    "tabWidth": 2,
+    "useTabs": false
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+      "prettier --write"
+    ]
+  },
+  "snyk": true,
   "scripts": {
-    "build": "cross-env NODE_ENV=production NODE_PATH=. webpack --progress",
-    "clean": "del-cli target",
-    "lint": "eslint -c .eslintrc.yml \"{,!(node_modules)/**/}*.+(js|jsx)\"",
-    "lint:fix": "eslint -c .eslintrc.yml \"{,!(node_modules)/**/}*.+(js|jsx)\" --fix",
-    "prebuild": "run-s clean lint:fix format",
-    "server": "cross-env NODE_ENV=development nodemon -w 'server/**/*.*' server/main.js",
-    "server:dev": "cross-env NODE_ENV=development webpack-dev-server --progress",
-    "start": "cross-env NODE_PATH=. npm run server:dev",
-    "test": "cross-env --env=jsdom NODE_PATH=. NODE_ENV=test react-scripts test",
-    "test:ci": "cross-env CI=true --env=jsdom NODE_PATH=. NODE_ENV=test react-scripts test",
-    "format": "prettier --write \"{,!(node_modules)/**/}*.+(js|jsx|json|yml|scss|md)\"",
-    "snyk-protect": "snyk-protect",
-    "prepublish": "npm run snyk-protect",
+    "build": "react-scripts build",
+    "deploy": "gh-pages -d build",
+    "eject": "react-scripts eject",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,scss,md}\"",
+    "lint": "eslint \"**/*.+(js|jsx)\"",
+    "lint:fix": "eslint \"**/*.+(js|jsx)\" --fix",
+    "prebuild": "npm run lint:fix && npm run format",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d target"
+    "prepublish": "npm run snyk-protect",
+    "snyk-protect": "snyk-protect",
+    "start": "react-scripts start",
+    "test": "react-scripts test --env=jsdom"
   },
   "dependencies": {
-    "classnames": "^2.3.2",
+    "@mui/icons-material": "^5.11.0",
+    "@mui/material": "^5.11.7",
+    "@reduxjs/toolkit": "^1.9.2",
+    "connected-react-router": "^6.9.3",
     "core-js": "^3.27.2",
-    "firebase": "9.16.0",
+    "firebase": "^9.17.1",
     "immutable": "^4.2.3",
-    "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.5",
-    "react-router": "^3.2.6",
-    "react-router-redux": "^4.0.8",
-    "redux": "^4.2.1",
+    "react-router-dom": "^4.3.1",
     "redux-thunk": "^2.4.2",
     "regenerator-runtime": "^0.13.11",
-    "reselect": "^4.1.7",
-    "webpack": "^5.75.0"
+    "reselect": "^4.1.7"
   },
   "devDependencies": {
     "@babel/core": "^7.20.12",
     "@babel/eslint-parser": "^7.19.1",
-    "@babel/plugin-proposal-function-bind": "^7.18.9",
-    "@babel/preset-env": "^7.20.2",
-    "@babel/preset-react": "^7.18.6",
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
     "@snyk/protect": "^1.1096.0",
-    "babel-loader": "^8.3.0",
-    "cross-env": "^7.0.3",
-    "css-loader": "^6.7.3",
-    "del-cli": "^5.0.0",
-    "dotenv-webpack": "^8.0.1",
+    "enzyme": "^3.11.0",
     "eslint": "^8.33.0",
     "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-prettier": "^4.2.1",
     "express": "^4.18.2",
     "gh-pages": "^5.0.0",
-    "html-webpack-plugin": "^5.5.0",
-    "mini-css-extract-plugin": "^2.7.2",
-    "minx": "^0.4.14",
-    "morgan": "^1.10.0",
-    "node-sass": "^8.0.0",
-    "nodemon": "^2.0.20",
-    "npm-run-all": "^4.1.5",
+    "history": "^4.10.1",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.1.1",
     "prettier": "^2.8.3",
-    "react-hot-loader": "^4.13.1",
+    "prop-types": "^15.8.1",
     "react-scripts": "^5.0.1",
-    "sass-loader": "^13.2.0",
-    "sinon": "^15.0.1",
-    "style-loader": "^3.3.1",
-    "webpack-cli": "^5.0.1",
-    "webpack-dev-server": "^4.11.1",
-    "winston": "^3.8.2"
+    "sinon": "^15.0.1"
   },
-  "snyk": true,
-  "browserLists": [
-    "last 3 versions",
-    "> 0.25%, not dead"
-  ]
+  "browserslist": {
+    "production": [
+      ">0.25%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
 }

@@ -1,0 +1,15 @@
+{
+  "short_name": "Todo React Redux",
+  "name": "Todo app with React, React Redux, and Firebase",
+  "icons": [
+    {
+      "src": "./favicon.ico",
+      "sizes": "64x64",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "./index.html",
+  "display": "standalone",
+  "theme_color": "#fff",
+  "background_color": "#000"
+}
