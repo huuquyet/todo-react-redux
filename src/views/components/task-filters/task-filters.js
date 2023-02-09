@@ -1,33 +1,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {NavLink} from 'react-router-dom';
-import {Link, Stack, Typography} from '@mui/material';
-
-const LinkBehavior = React.forwardRef((props, ref) => (
-  <NavLink ref={ref} {...props} role={undefined} />
-));
+import {Stack} from '@mui/material';
 
 const TaskFilters = ({filter}) => (
   <Stack direction="row" spacing={2} sx={{mb: 4}}>
-    <Link component={LinkBehavior} to="/" color="inherit" underline="none">
-      <Typography sx={{fontWeight: !filter ? 'bold' : ''}}>View All</Typography>
-    </Link>
-    <Link
-      component={LinkBehavior}
-      color="inherit"
-      underline="none"
-      to={{pathname: '/', search: '?filter=active'}}>
-      <Typography sx={{fontWeight: filter === 'active' ? 'bold' : ''}}>Active</Typography>
-    </Link>
-    <Link
-      component={LinkBehavior}
-      color="inherit"
-      underline="none"
-      to={{pathname: '/', search: '?filter=completed'}}>
-      <Typography sx={{fontWeight: filter === 'completed' ? 'bold' : ''}}>
-        Completed
-      </Typography>
-    </Link>
+    <NavLink
+      to="/"
+      style={{color: 'inherit', textDecoration: !filter ? 'underline' : 'none'}}>
+      View All
+    </NavLink>
+    <NavLink
+      to={{pathname: '/', search: '?filter=active'}}
+      style={{
+        color: 'inherit',
+        textDecoration: filter === 'active' ? 'underline' : 'none',
+      }}>
+      Active
+    </NavLink>
+    <NavLink
+      to={{pathname: '/', search: '?filter=completed'}}
+      style={{
+        color: 'inherit',
+        textDecoration: filter === 'completed' ? 'underline' : 'none',
+      }}>
+      Completed
+    </NavLink>
   </Stack>
 );
 

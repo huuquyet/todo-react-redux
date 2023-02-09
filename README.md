@@ -14,15 +14,13 @@ A version of this app built with [redux-saga middleware](https://github.com/yelo
 - Create React App
 - React Redux
 - React Router
-- React Router Redux
-- Redux
+- Connected React Router
+- Redux Toolkit
 - Redux Thunk
-- React-Hot-Loader
-- Redux Devtools Extension for Chrome
 - Firebase SDK with OAuth authentication
 - Immutable
 - Reselect
-- SASS
+- Eslint Prettier
 
 ## Quick Start
 
@@ -83,8 +81,8 @@ $ firebase deploy
 
 ## NPM Commands
 
-| Script          | Description                                         |
-| --------------- | --------------------------------------------------- |
-| `npm start`     | Start development server @ `localhost:3000` |
-| `npm run build` | Build the application to `./build` directory        |
-| `npm test`      | Test the application; watch for changes and retest  |
+| Script          | Description                                        |
+| --------------- | -------------------------------------------------- |
+| `npm start`     | Start development server @ `localhost:3000`        |
+| `npm run build` | Build the application to `./build` directory       |
+| `npm test`      | Test the application; watch for changes and retest |
