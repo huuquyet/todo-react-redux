@@ -1,15 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {AppBar, Divider, IconButton, Toolbar, Tooltip, Typography} from '@mui/material';
+import {AppBar, Divider, IconButton, Link, Toolbar, Tooltip} from '@mui/material';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LogoutIcon from '@mui/icons-material/Logout';
 
 const Header = ({authenticated, signOut}) => (
   <AppBar position="fixed">
     <Toolbar>
-      <Typography variant="h4" sx={{flexGrow: 1}} noWrap>
+      <Link
+        variant="h4"
+        href="/"
+        sx={{flexGrow: 1}}
+        color="inherit"
+        underline="none"
+        noWrap>
         Todo React Redux
-      </Typography>
+      </Link>
       <Tooltip title="Sign out">
         <IconButton
           aria-label="Sign out"

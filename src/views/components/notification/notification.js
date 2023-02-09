@@ -42,6 +42,8 @@ class Notification extends Component {
   render() {
     return (
       <Alert
+        severity="success"
+        color="info"
         sx={{position: 'fixed', left: '33%', top: 60, width: 1 / 3}}
         action={
           <Button onClick={this.props.action} color="inherit" size="small">

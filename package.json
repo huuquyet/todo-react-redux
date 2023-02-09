@@ -14,28 +14,7 @@
   "license": "MIT",
   "private": true,
   "engines": {
-    "node": ">=8.9"
-  },
-  "babel": {
-    "presets": [
-      "@babel/preset-react",
-      "@babel/preset-env"
-    ],
-    "plugins": [
-      "@babel/plugin-proposal-function-bind"
-    ],
-    "env": {
-      "development": {
-        "presets": [
-          [
-            "@babel/preset-react",
-            {
-              "development": true
-            }
-          ]
-        ]
-      }
-    }
+    "node": ">=10.13"
   },
   "eslintConfig": {
     "root": true,
@@ -82,23 +61,22 @@
   },
   "snyk": true,
   "scripts": {
-    "eject": "react-scripts eject",
-    "build": "cross-env NODE_PATH=. react-scripts build",
+    "build": "react-scripts build",
     "deploy": "gh-pages -d build",
+    "eject": "react-scripts eject",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,scss,md}\"",
     "lint": "eslint \"**/*.+(js|jsx)\"",
     "lint:fix": "eslint \"**/*.+(js|jsx)\" --fix",
     "prebuild": "npm run lint:fix && npm run format",
     "predeploy": "npm run build",
     "prepublish": "npm run snyk-protect",
-    "server": "cross-env NODE_ENV=development webpack --progress",
-    "server:dev": "cross-env NODE_ENV=development webpack-dev-server --progress",
     "snyk-protect": "snyk-protect",
-    "start": "cross-env NODE_PATH=. react-scripts start",
-    "test": "cross-env NODE_PATH=. react-scripts test --env=jsdom",
-    "test:ci": "cross-env NODE_PATH=. CI=true react-scripts test --env=jsdom"
+    "start": "react-scripts start",
+    "test": "react-scripts test --env=jsdom"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
     "@mui/icons-material": "^5.11.0",
     "@mui/material": "^5.11.7",
     "@reduxjs/toolkit": "^1.9.2",
@@ -106,6 +84,7 @@
     "core-js": "^3.27.2",
     "firebase": "^9.17.1",
     "immutable": "^4.2.3",
+    "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.5",
@@ -117,15 +96,7 @@
   "devDependencies": {
     "@babel/core": "^7.20.12",
     "@babel/eslint-parser": "^7.19.1",
-    "@babel/plugin-proposal-function-bind": "^7.18.9",
-    "@babel/preset-env": "^7.20.2",
-    "@babel/preset-react": "^7.18.6",
-    "@emotion/react": "^11.10.5",
-    "@emotion/styled": "^11.10.5",
     "@snyk/protect": "^1.1096.0",
-    "babel-loader": "^9.1.2",
-    "cross-env": "^7.0.3",
-    "dotenv-webpack": "^8.0.1",
     "enzyme": "^3.11.0",
     "eslint": "^8.33.0",
     "eslint-config-prettier": "^8.6.0",
@@ -133,17 +104,11 @@
     "express": "^4.18.2",
     "gh-pages": "^5.0.0",
     "history": "^4.10.1",
-    "html-webpack-plugin": "^5.5.0",
     "husky": "^8.0.3",
     "lint-staged": "^13.1.1",
     "prettier": "^2.8.3",
-    "prop-types": "^15.8.1",
-    "react-hot-loader": "^4.13.1",
     "react-scripts": "^5.0.1",
-    "sinon": "^15.0.1",
-    "webpack": "^5.75.0",
-    "webpack-cli": "^5.0.1",
-    "webpack-dev-server": "^4.11.1"
+    "sinon": "^15.0.1"
   },
   "browserslist": {
     "production": [
